@@ -1,0 +1,55 @@
+﻿
+@model Product
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Create new advertise</h2>
+<head>
+
+</head>
+<body>
+    <div>
+        @if (Model != null)
+        {
+            <div>
+                @ViewBag.ItemAdded
+            </div>
+            <a asp-action="AvailableItems" asp-controller="Home">Return to HomePage</a>
+        }
+    </div>
+
+
+    <form asp-action="AddNewAdvertisement" method="post">
+        <div>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" />
+            <span asp-validation-for="Title"></span>
+        </div>
+        <div>
+            <label asp-for="ShortDescription"></label>
+            <input asp-for="ShortDescription" />
+            <span asp-validation-for="ShortDescription"></span>
+        </div>
+        <div>
+            <label asp-for="LongDescription"></label>
+            <input asp-for="LongDescription" />
+            <span asp-validation-for="LongDescription"></span>
+        </div>
+        <div>
+            <label asp-for="Price"></label>
+            <input asp-for="Price" />
+            <span asp-validation-for="Price"></span>
+        </div>
+
+        @*<div>@Model.Photo1</div>
+            <div>@Model.Photo2</div>
+            <div>@Model.Photo3</div>*@
+        <input type="submit" value="Save " />
+        <div asp-validation-summary="All">
+
+
+        </div>
+    </form>
+</body>

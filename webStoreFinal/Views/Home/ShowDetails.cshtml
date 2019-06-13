@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "ShowDetails";
+}
+@model Product
+<h2>Additional Details</h2>
+
+<div class="moreDetails">
+    <div class="itemDetails">
+        <div>@Model.Title</div>
+        <div>@Model.ShortDescription</div>
+        <div>@Model.PublishedDate</div>
+        <div>@Model.Photo1</div>
+        <div>@Model.Photo2</div>
+        <div>@Model.Photo3</div>
+        <div>@Model.LongDescription</div>
+        <div>@Model.Price</div>
+        <div>@Model.LongDescription</div>
+    </div>
+
+    <div class="sellerDetails">
+        <div>
+            @Model.Seller.FirstName
+        </div>
+        <div>
+            @Model.Seller.LastName
+        </div>
+        <div>
+            @Model.Seller.BirthDate
+        </div>
+        <div>
+            @Model.Seller.Email
+        </div>
+
+
+    </div>
+
+    <a asp-action="AddToCart" asp-controller="Home" asp-route-id=@Model.ProductKey asp-route-state=@Model.ProductState>
+        <input type="button" value="Add To Cart" />
+    </a>
+
+    <a asp-action="Home" asp-controller="AvailableItems">
+        <input type="button" value="Return" />
+    </a>
+
+
+
+
+
+</div>
+
+

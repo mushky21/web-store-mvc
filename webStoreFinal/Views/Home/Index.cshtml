@@ -1,0 +1,28 @@
+﻿@model List<webStoreFinal.Models.Product>
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h2>Home Page</h2>
+<hr />
+<p>
+    <div>
+        your messages here:
+    </div>
+    <div class="ErrorMessages">
+        @ViewBag.ErrorMessage
+    </div>
+    <div class="buttons">
+        <a asp-controller="Home" asp-action="OrderByDate">order by date</a>
+        <a asp-controller="Home" asp-action="OrderByTitle">order by Title</a>
+    </div>
+
+</p>
+<div>
+    @foreach (var item in Model)
+    {
+        <div>
+            @await Html.PartialAsync("_AdvertisePartialView", item)
+        </div>
+    }
+</div>
