@@ -14,6 +14,7 @@ namespace webStoreFinal.Services
     {
         private UserManager<MyUser> _userManager;
         private IHttpContextAccessor _httpContextAccessor;//this for FindUserAuthenticated,need http context
+
         public UserRepository(UserManager<MyUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
@@ -28,8 +29,7 @@ namespace webStoreFinal.Services
                 LastName = registerData.LastName,
                 UserName = registerData.Username,
                 BirthDate = registerData.BirthDate,
-                Email = registerData.Email,
-                PasswordHash = registerData.Password
+                Email = registerData.Email
             };
             var result = await _userManager.CreateAsync(user, registerData.Password);
             return result;
@@ -51,11 +51,25 @@ namespace webStoreFinal.Services
           return _userManager.Users.FirstOrDefault(u => u.Id == userId);
         }
 
-        public Task<IdentityResult> UpdateUser(MyUser user)
+        public Task<IdentityResult> UpdateUser(Update updateData)
         {
-            return _userManager.UpdateAsync(user);
-        }
+            //check if user changed his password
+            string password;
+            if (updateData.Password != null) password = updateData.Password;
+            else password = updateData.CurrentPassword;
 
+            MyUser updatedUser=new MyUser
+            {
+                FirstName = updateData.FirstName,
+                LastName = updateData.LastName,
+                BirthDate = updateData.BirthDate,
+                Email = updateData.Email,
+                PasswordHash = password
+            };
+            return _userManager.UpdateAsync(updatedUser);
+
+        }
+    
         public List<MyUser> Users()
         {
             return _userManager.Users.ToList();

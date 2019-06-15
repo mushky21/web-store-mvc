@@ -23,8 +23,19 @@ namespace webStoreFinal.Controllers
         public IActionResult Index()
         {
             if (!User.Identity.IsAuthenticated) return View("Register");
-            MyUser user = _userRepository.FindUserAuthenticated();
-            return View("UpdatingDetails",);
+            MyUser userAuthenicated = _userRepository.FindUserAuthenticated();
+
+            Update currentUserData = new Update
+            {
+                BirthDate= userAuthenicated.BirthDate,
+                CurrentPassword=userAuthenicated.PasswordHash,
+                Email=userAuthenicated.Email,
+                FirstName=userAuthenicated.FirstName,
+                LastName=userAuthenicated.LastName,
+                Username=userAuthenicated.UserName         
+            };
+
+            return View("UpdatingDetails",userAuthenicated);
         }
 
         [HttpPost]
@@ -47,10 +58,15 @@ namespace webStoreFinal.Controllers
             return View("Register");
         }
 
-        [HttpGet]
-        public IActionResult UpdatingDetails(MyUser myUser)
+        [HttpPut]
+        public async Task<IActionResult> UpdatingDetails(Update updateData)
         {
-            _userRepository.UpdateUser(myUser);
+            var result = await _userRepository.UpdateUser(updateData);
+            if(result.Succeeded)
+            {
+                return RedirectToAction("AvailableItems", "Home");
+            }
+            return View("UpdatingDetails", updateData);//need?         
         }
     }
 }

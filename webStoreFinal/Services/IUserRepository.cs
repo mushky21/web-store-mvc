@@ -13,7 +13,7 @@ namespace webStoreFinal.Services
         MyUser FindUserAuthenticated();
         MyUser FindUserById(string userId);
         Task<IdentityResult> AddUser(Register registerData);
-        Task<IdentityResult> UpdateUser(MyUser user);
+        Task<IdentityResult> UpdateUser(Update updateData);
 
         // bool RemoveUser(int userId);//not in the specfication
     }
