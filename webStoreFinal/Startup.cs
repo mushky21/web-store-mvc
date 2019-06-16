@@ -48,6 +48,7 @@ namespace webStoreFinal
             }
 
             app.UseStaticFiles();
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
 
             app.UseMvc(routes =>

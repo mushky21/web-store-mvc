@@ -35,12 +35,12 @@ namespace webStoreFinal.Services
             return result;
         }
 
-        public Task<MyUser> FindUserAuthenticated()
+        public async Task<MyUser> FindUserAuthenticated()
         {
             var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             if (userId != null)//more safe
             {
-                return  _userManager.FindByIdAsync(userId);
+                return await _userManager.FindByIdAsync(userId);
 
             }
             return null;
@@ -51,7 +51,7 @@ namespace webStoreFinal.Services
             return await _userManager.FindByIdAsync(userId);
         }
 
-        public Task<IdentityResult> UpdateUser(Update updateData)
+        public async Task<IdentityResult> UpdateUser(Update updateData)
         {
             //check if user changed his password
             string password;
@@ -66,7 +66,7 @@ namespace webStoreFinal.Services
                 Email = updateData.Email,
                 PasswordHash = password
             };
-            return _userManager.UpdateAsync(updatedUser);
+            return await _userManager.UpdateAsync(updatedUser);
 
         }
 
