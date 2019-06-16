@@ -13,12 +13,12 @@ namespace webStoreFinal.Controllers
     public class ShoppingCartController : Controller
     {
         private IProductRepository _productRepository;
-        private ICartService cartService;
+        private ICartService _cartService;
 
-        public ShoppingCartController(IProductRepository productRepository)
+        public ShoppingCartController(IProductRepository productRepository, ICartService cartService)
         {
             _productRepository = productRepository;
-            cartService=new cart
+            _cartService = cartService;
         }
 
         public IActionResult ShowCart()
