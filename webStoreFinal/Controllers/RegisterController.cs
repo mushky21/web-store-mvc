@@ -20,10 +20,10 @@ namespace webStoreFinal.Controllers
 
         //navigated to view of registration if user is not authenticated
         //else navigated to view of updating details
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (!User.Identity.IsAuthenticated) return View("Register");
-            MyUser userAuthenicated = _userRepository.FindUserAuthenticated();
+            MyUser userAuthenicated =await _userRepository.FindUserAuthenticated();
 
             Update currentUserData = new Update
             {
