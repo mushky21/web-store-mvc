@@ -10,8 +10,8 @@ namespace webStoreFinal.Services
     public interface IUserRepository
     {
         List<MyUser> Users();
-        MyUser FindUserAuthenticated();
-        MyUser FindUserById(string userId);
+        Task<MyUser> FindUserAuthenticated();
+        Task<MyUser> FindUserById(string userId);
         Task<IdentityResult> AddUser(Register registerData);
         Task<IdentityResult> UpdateUser(Update updateData);
 

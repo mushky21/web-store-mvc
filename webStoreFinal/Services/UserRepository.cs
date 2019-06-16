@@ -35,20 +35,20 @@ namespace webStoreFinal.Services
             return result;
         }
 
-        public MyUser FindUserAuthenticated()
+        public Task<MyUser> FindUserAuthenticated()
         {
             var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             if (userId != null)//more safe
             {
-                return _userManager.FindByIdAsync(userId).Result;
+                return  _userManager.FindByIdAsync(userId);
 
             }
             return null;
         }
 
-        public MyUser FindUserById(string userId)
+        public async Task<MyUser> FindUserById(string userId)
         {
-          return _userManager.Users.FirstOrDefault(u => u.Id == userId);
+            return await _userManager.FindByIdAsync(userId);
         }
 
         public Task<IdentityResult> UpdateUser(Update updateData)
@@ -58,7 +58,7 @@ namespace webStoreFinal.Services
             if (updateData.Password != null) password = updateData.Password;
             else password = updateData.CurrentPassword;
 
-            MyUser updatedUser=new MyUser
+            MyUser updatedUser = new MyUser
             {
                 FirstName = updateData.FirstName,
                 LastName = updateData.LastName,
@@ -69,7 +69,7 @@ namespace webStoreFinal.Services
             return _userManager.UpdateAsync(updatedUser);
 
         }
-    
+
         public List<MyUser> Users()
         {
             return _userManager.Users.ToList();
