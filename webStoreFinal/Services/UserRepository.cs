@@ -41,7 +41,6 @@ namespace webStoreFinal.Services
             if (userId != null)//more safe
             {
                 return  _userManager.FindByIdAsync(userId);
-
             }
             return null;
         }
