@@ -7,11 +7,17 @@
 <hr />
 <p>
     <div>
+        @section Login{
+            @await Html.PartialAsync("_LoginPartialView")
+        }
+    </div>
+    <div>
         your messages here:
     </div>
     <div class="ErrorMessages">
         @ViewBag.ErrorMessage
     </div>
+
     <div class="buttons">
         <a asp-controller="Home" asp-action="OrderByDate">order by date</a>
         <a asp-controller="Home" asp-action="OrderByTitle">order by Title</a>

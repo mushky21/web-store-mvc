@@ -12,6 +12,11 @@
     <title>UpdatingDetails</title>
 </head>
 <body>
+    <div>
+        @section Login{
+            @await Html.PartialAsync("_LoginPartialView")
+        }
+    </div>
     @*missing:need to check how to display red asterik instead of error massege,for each field*@
     <form asp-action="UpdatingDetails" asp-controller="Register" method="put">
         <div>
