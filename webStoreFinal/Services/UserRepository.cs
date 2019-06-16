@@ -40,12 +40,8 @@ namespace webStoreFinal.Services
             var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             if (userId != null)//more safe
             {
-<<<<<<< HEAD
-                return  _userManager.FindByIdAsync(userId);
-=======
                 return await _userManager.FindByIdAsync(userId);
 
->>>>>>> master
             }
             return null;
         }

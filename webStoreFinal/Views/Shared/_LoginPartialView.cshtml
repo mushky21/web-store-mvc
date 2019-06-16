@@ -1,0 +1,29 @@
+﻿@model Login
+@inject IUserRepository UserRepository
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<div>
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div>
+                <label asp-for="Username"></label>
+                <input asp-for="Username" />
+            </div>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+            </div>
+            <input type="submit" value="Login" />
+        </form>
+    }
+    else
+    {
+        <div>
+            hello, @UserRepository.FindUserAuthenticated().Result.FirstName -
+            @UserRepository.FindUserAuthenticated().Result.LastName
+        </div>
+    }
+</div>
