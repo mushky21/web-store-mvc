@@ -13,10 +13,12 @@ namespace webStoreFinal.Controllers
     public class ShoppingCartController : Controller
     {
         private IProductRepository _productRepository;
+        private ICartService cartService;
 
         public ShoppingCartController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
+            cartService=new cart
         }
 
         public IActionResult ShowCart()
@@ -48,6 +50,17 @@ namespace webStoreFinal.Controllers
             new CookieOptions { MaxAge = TimeSpan.FromHours(1) });
             return View("ShowCart", _productRepository.ShowCart(cartProductsId));
 
+        }
+        [HttpPost]
+        public IActionResult CompletePurchase(List<double> prices)
+        {
+            double visitorPrice = _cartService.VisitorCartSum(prices);
+            double memberPrice = _cartService.MemberCartSum(prices);
+
+            TempData["visitorPrice"] = visitorPrice;
+            TempData["memberPrice"] = memberPrice;
+
+            return RedirectToAction("ShowCart");
         }
     }
 }

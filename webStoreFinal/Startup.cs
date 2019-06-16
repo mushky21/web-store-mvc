@@ -29,6 +29,7 @@ namespace webStoreFinal
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ICartService, CartService>();
 
 
 
