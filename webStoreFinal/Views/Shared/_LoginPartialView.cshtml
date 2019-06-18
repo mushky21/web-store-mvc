@@ -14,7 +14,7 @@
                 The username or password are incorrect
             </div>
         }
-        <form asp-action="Login" asp-controller="Account">
+        <form asp-action="Login" asp-controller="Account" method="post">
             <div>
                 <label asp-for="Username"></label>
                 <input asp-for="Username" />
