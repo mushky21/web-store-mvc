@@ -50,13 +50,13 @@ namespace webStoreFinal
 
             app.UseStaticFiles();
             app.UseAuthentication();
-            app.UseMvcWithDefaultRoute();
+           // app.UseMvcWithDefaultRoute();
 
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "Default",
-                    template: "/optional/{Home}/{AvailableItems}"
+                    template: "{controller=Home}/{action=AvailableItems}"
                 );
 
             });

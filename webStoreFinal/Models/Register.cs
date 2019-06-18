@@ -30,7 +30,6 @@ namespace webStoreFinal.Models
         public DateTime BirthDate { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
-        [RegularExpression(".+\\@.+\\..+",ErrorMessage ="please type valid email.")]//missing:to check the rules for email and add this to the error message
         public string Email { get; set; }
     }
 }

@@ -55,19 +55,20 @@ namespace webStoreFinal.Controllers
 
         }
 
-        need to change...
-        [HttpPost]
-        public IActionResult CompletePurchase()
-        {
-            double visitorPrice = _cartService.VisitorCartSum(prices);
-            double memberPrice = _cartService.MemberCartSum(prices);
+       
+        //[HttpPost]
+        //public IActionResult CompletePurchase()
+        //{
 
-            TempData["visitorPrice"] = visitorPrice;
-            TempData["memberPrice"] = memberPrice;
+        //    double visitorPrice = _cartService.VisitorCartSum(prices);
+        //    double memberPrice = _cartService.MemberCartSum(prices);
+
+        //    TempData["visitorPrice"] = visitorPrice;
+        //    TempData["memberPrice"] = memberPrice;
 
 
-            return RedirectToAction("ShowCart");
-        }
+        //    return RedirectToAction("ShowCart");
+        //}
 
     }
 }
