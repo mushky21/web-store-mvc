@@ -11,24 +11,31 @@ namespace webStoreFinal.Services
     public class CartService : ICartService
     {
         private IHttpContextAccessor _httpContextAccessor;
-        public CartService(IHttpContextAccessor httpContextAccessor)
+        private IProductRepository _productRepository;
+
+        public CartService(IHttpContextAccessor httpContextAccessor, IProductRepository productRepository)
         {
             _httpContextAccessor = httpContextAccessor;
+            _productRepository = productRepository;
         }
 
-        public double MemberCartSum(List<double> prices)
+        public List<Product> ShowCart()
         {
-            return VisitorCartSum(prices) * ConstDefinitions.MembersDiscount;
+            HashSet<int> cartProductsId = ProductsInCookies();
+            var products = from product in _productRepository.Products() //ברפוזיטורי  מחזירים רשימת אוביקטים מסוג מוצר
+                           where cartProductsId.Contains(product.ProductKey) // מחפשים את המוצרים שנמצאים בפרמטר שקיבלתי למתודה -משמע מה שנמצא לי בעגלה
+                           select product;
+            return products.ToList();
         }
 
-        public double VisitorCartSum(List<double> prices)
+        public double MemberCartSum(List<Product> products)
         {
-            double totalPrice = default(double);
-            foreach (var item in prices)
-            {
-                totalPrice += item;
-            }
-            return totalPrice;
+            return VisitorCartSum(products) * ConstDefinitions.MembersDiscount;
+        }
+
+        public double VisitorCartSum(List<Product> products)
+        {
+            return products.Sum(product => product.Price); ;
         }
 
         //get the hashset of products (which contain for the id for each product) from cookies
@@ -48,12 +55,14 @@ namespace webStoreFinal.Services
         }
 
         //get the hashset of products from cookies
-        //remove product and update cookie and return the updated hashset (for controller of shopping cart)
-        public HashSet<int> RemoveProductFromCookie(int id)
+        //remove product and update cookie,change state and return the updated hashset 
+        public HashSet<int> RemoveProduct(int id)
         {
             HashSet<int> cartProductsId = ProductsInCookies();
             cartProductsId.Remove(id);
             UpdateCartInCookies(cartProductsId);
+            //update state
+            _productRepository.UpdateProductState(id, State.Available);
             return cartProductsId;
         }
 
@@ -67,11 +76,27 @@ namespace webStoreFinal.Services
 
         //get products from cookie and add the is to hashset
         //update cookie with updated hashset
-        public void AddProductToCookie(int id)
+        public void AddProduct(int id)
         {
             HashSet<int> cartProductsId = ProductsInCookies();
             cartProductsId.Add(id);
             UpdateCartInCookies(cartProductsId);
+
+            _productRepository.UpdateProductState(id, State.InCart);
+        }
+
+        public void CompletePurchase()
+        {
+           //get from cookies
+            HashSet<int> cartProductsId=ProductsInCookies();
+
+           //update all products by state of buyed
+           foreach(var productId in cartProductsId)
+            {
+                _productRepository.UpdateProductBuyer()
+            }
+
+           //ovveride cart in empty string or delete?
 
         }
     }

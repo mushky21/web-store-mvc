@@ -12,11 +12,10 @@ namespace webStoreFinal.Services
         Product FindProduct(int productId);
         bool AddProduct(Product newProduct);
         bool RemoveProduct(int productId);
-        bool UpdateProductBuyer(Product updatedProduct);
+        bool UpdateProductBuyer(int productId, int buyerId);
         bool UpdateProductState(int id,State state);
         List<Product> OrderByTitle();
         List<Product> OrderByDate();
         List<Product> AvailableItems();
-        List<Product> ShowCart(HashSet<int> cartProductsId);
     }
 }

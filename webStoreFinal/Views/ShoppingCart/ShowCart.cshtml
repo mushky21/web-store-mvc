@@ -40,17 +40,17 @@
             }
         </table>
         <div class="cart-summary">
-            <form asp-controller="ShoppingCart" asp-action="CompletePurchase" method="post">
-                <div>
-                    total price for visitor:
-                    @TempData["visitorPrice"]
+            <div>
+                total price for visitor:
+                @TempData["visitorPrice"]
 
-                </div>
-                <div>
-                    total price for members:
-                    @TempData["memberPrice"]
-                    @*add member price*@
-                </div>
+            </div>
+            <div>
+                total price for members:
+                @TempData["memberPrice"]
+                @*add member price*@
+            </div>
+            <form asp-controller="ShoppingCart" asp-action="CompletePurchase" method="post">
                 <input type="submit" value="Purchase" />
             </form>
 

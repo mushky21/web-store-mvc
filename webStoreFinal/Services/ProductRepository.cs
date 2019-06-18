@@ -45,13 +45,20 @@ namespace webStoreFinal.Services
         // general note 1:since database approaches are expensive we chose to seperate updating product buyer and state to different methods because 
         // wanted to approach only specific datacontext properties that were needed to be updated
 
-        public bool UpdateProductBuyer(Product updatedProduct)
+        public bool UpdateProductBuyer(int productId,int buyerId)
         {
-            var updated = _storeDbContext.Products.First(p => p.ProductKey == updatedProduct.ProductKey);
-            updated.BuyerId = updatedProduct.BuyerId;
+            var updated = FindProduct(productId);
+            updated.BuyerId = buyerId;
             int updatedRows = _storeDbContext.SaveChanges();
             return updatedRows > 0;
         }
+        //public bool UpdateProductBuyer(Product updatedProduct)
+        //{
+        //    var updated = _storeDbContext.Products.First(p => p.ProductKey == updatedProduct.ProductKey);
+        //    updated.BuyerId = updatedProduct.BuyerId;
+        //    int updatedRows = _storeDbContext.SaveChanges();
+        //    return updatedRows > 0;
+        //}
 
         public bool UpdateProductState(int id,State state)
         {
@@ -93,12 +100,5 @@ namespace webStoreFinal.Services
             return availableItems.ToList();
         }
 
-        public List<Product> ShowCart(HashSet<int> cartProductsId)
-        {
-            var products = from product in Products() //ברפוזיטורי  מחזירים רשימת אוביקטים מסוג מוצר
-                           where cartProductsId.Contains(product.ProductKey) // מחפשים את המוצרים שנמצאים בפרמטר שקיבלתי למתודה -משמע מה שנמצא לי בעגלה
-                           select product;
-            return products.ToList();
-        }
     }
 }

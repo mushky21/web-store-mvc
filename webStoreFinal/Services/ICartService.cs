@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using webStoreFinal.Models;
 
 namespace webStoreFinal.Services
 {
     public interface ICartService
     {
-        double VisitorCartSum(List<double> prices);
-        double MemberCartSum(List<double> prices);
+        double VisitorCartSum(List<Product> products);
+        double MemberCartSum(List<Product> products);
 
+        List<Product> ShowCart();
         void UpdateCartInCookies(HashSet<int> cartProductsId);
         HashSet<int> ProductsInCookies();
-        HashSet<int> RemoveProductFromCookie(int id);
-        void AddProductToCookie(int id);
+        HashSet<int> RemoveProduct(int id);
+        void AddProduct(int id);
+        void CompletePurchase();
 
     }
 }

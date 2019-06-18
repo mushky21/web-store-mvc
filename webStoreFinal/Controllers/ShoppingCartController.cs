@@ -13,27 +13,30 @@ namespace webStoreFinal.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private IProductRepository _productRepository;
         private ICartService _cartService;
 
         public ShoppingCartController(IProductRepository productRepository, ICartService cartService)
         {
-            _productRepository = productRepository;
             _cartService = cartService;
         }
 
         public IActionResult ShowCart()
         {
-            List<Product> currentCart = _productRepository.ShowCart(_cartService.ProductsInCookies());
+            List<Product> currentCart = _cartService.ShowCart();
+
+            double visitorPrice = _cartService.VisitorCartSum(currentCart);
+            double memberPrice = _cartService.MemberCartSum(currentCart);
+
+            TempData["visitorPrice"] = visitorPrice;
+            TempData["memberPrice"] = memberPrice;
+
             return View(currentCart);//לא ממשנו רק יצרנו את הדף של זה
         }
 
         public IActionResult RemoveFromCart(int id)
         {
-            HashSet<int> cartProductsId = _cartService.RemoveProductFromCookie(id);
-            _productRepository.UpdateProductState(id,State.Available);
-
-            return View("ShowCart", _productRepository.ShowCart(cartProductsId));
+            HashSet<int> cartProductsId = _cartService.RemoveProduct(id);
+            return View("ShowCart", _cartService.ShowCart());
 
         }
 
@@ -44,8 +47,7 @@ namespace webStoreFinal.Controllers
         {
             if (productState == State.Available)
             {
-                _productRepository.UpdateProductState(id,State.InCart);
-                _cartService.AddProductToCookie(id);
+                _cartService.AddProduct(id);
             }
             else
             {
@@ -55,20 +57,14 @@ namespace webStoreFinal.Controllers
 
         }
 
-       
-        //[HttpPost]
-        //public IActionResult CompletePurchase()
-        //{
 
-        //    double visitorPrice = _cartService.VisitorCartSum(prices);
-        //    double memberPrice = _cartService.MemberCartSum(prices);
-
-        //    TempData["visitorPrice"] = visitorPrice;
-        //    TempData["memberPrice"] = memberPrice;
-
-
-        //    return RedirectToAction("ShowCart");
-        //}
+        [HttpPost]
+        public IActionResult CompletePurchase()
+        {
+            if(User.Identity.IsAuthenticated) 
+            _cartService.CompletePurchase();
+            return RedirectToAction("ShowCart");
+        }
 
     }
 }
