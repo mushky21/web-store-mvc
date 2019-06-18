@@ -61,6 +61,7 @@ namespace webStoreFinal.Controllers
             TempData["visitorPrice"] = visitorPrice;
             TempData["memberPrice"] = memberPrice;
 
+
             return RedirectToAction("ShowCart");
         }
     }

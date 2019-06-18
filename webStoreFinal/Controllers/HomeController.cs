@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,14 +12,17 @@ using webStoreFinal.Services;
 
 namespace webStoreFinal.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IProductRepository _productRepository;
+    
 
         public HomeController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
+       
 
         //public IActionResult Index(string key) //shows the items according to the wanted order by method.
         //{
@@ -30,23 +34,26 @@ namespace webStoreFinal.Controllers
         //    //}
         //    return View(myProductsList);
         //}
-
+        [AllowAnonymous]
         public IActionResult AvailableItems()
         {
             if (TempData["LoginError"] != null) ViewBag.LoginError = TempData["LoginError"];
             return View("Index", _productRepository.AvailableItems());
         }
 
+        [AllowAnonymous]
         public IActionResult OrderByDate()
         {
             return View("Index", _productRepository.OrderByDate());
         }
 
+        [AllowAnonymous]
         public IActionResult OrderByTitle()
         {
             return View("Index", _productRepository.OrderByTitle());
         }
 
+        [AllowAnonymous]
         public IActionResult ShowDetails(int id)
         {
             return View(_productRepository.FindProduct(id));
@@ -54,6 +61,7 @@ namespace webStoreFinal.Controllers
 
         //gets the current item list storaged in cookies and updates it when an item is added
         //goes first to available items action
+        [AllowAnonymous]
         public IActionResult AddToCart(int id, State productState)
         {
             if (productState == State.Available)
