@@ -9,6 +9,6 @@ namespace webStoreFinal.Models
     {
         public const double MembersDiscount = 0.9;
 
-      //  public int Exm { get; set; }
+        //  public int Exm { get; set; }
     }
 }

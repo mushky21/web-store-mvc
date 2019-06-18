@@ -34,5 +34,11 @@ namespace webStoreFinal.Controllers
                 //need to show error message of "the user name or password are incorrect"
             }
         }
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            Response.Cookies.Delete("AspNetCore.Application.Identity");//check!!
+            return RedirectToAction("AvailableItems");
+        }
     }
 }
