@@ -7,7 +7,7 @@
 <div>
     @if (!User.Identity.IsAuthenticated)
     {
-        <form asp-action="Login" asp-controller="Account" >
+        <form asp-action="Login" asp-controller="Account">
             <div>
                 <label asp-for="Username"></label>
                 <input asp-for="Username" />
@@ -21,9 +21,10 @@
     }
     else
     {
+        var userAuthenticated = await UserRepository.FindUserAuthenticated();    
         <div>
-            hello, @UserRepository.FindUserAuthenticated().Result.FirstName -
-            @UserRepository.FindUserAuthenticated().Result.LastName
+            hello, @userAuthenticated.FirstName -
+            @userAuthenticated.LastName
         </div>
     }
 </div>
