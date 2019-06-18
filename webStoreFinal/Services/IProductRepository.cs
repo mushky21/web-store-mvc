@@ -13,7 +13,7 @@ namespace webStoreFinal.Services
         bool AddProduct(Product newProduct);
         bool RemoveProduct(int productId);
         bool UpdateProductBuyer(Product updatedProduct);
-        bool UpdateProductState(int id);
+        bool UpdateProductState(int id,State state);
         List<Product> OrderByTitle();
         List<Product> OrderByDate();
         List<Product> AvailableItems();

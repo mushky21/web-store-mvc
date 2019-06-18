@@ -53,11 +53,11 @@ namespace webStoreFinal.Services
             return updatedRows > 0;
         }
 
-        public bool UpdateProductState(int id)
+        public bool UpdateProductState(int id,State state)
         {
             //search the wanted item in the repository and change it's status from available to in cart
             var foundProduct = FindProduct(id);
-            foundProduct.ProductState = State.InCart;
+            foundProduct.ProductState =state;
             int updated = _storeDbContext.SaveChanges();
             return updated > 0;
         }

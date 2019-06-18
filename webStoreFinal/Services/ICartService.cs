@@ -9,5 +9,11 @@ namespace webStoreFinal.Services
     {
         double VisitorCartSum(List<double> prices);
         double MemberCartSum(List<double> prices);
+
+        void UpdateCartInCookies(HashSet<int> cartProductsId);
+        HashSet<int> ProductsInCookies();
+        HashSet<int> RemoveProductFromCookie(int id);
+        void AddProductToCookie(int id);
+
     }
 }

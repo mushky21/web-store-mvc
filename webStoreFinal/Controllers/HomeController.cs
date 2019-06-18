@@ -59,38 +59,7 @@ namespace webStoreFinal.Controllers
             return View(_productRepository.FindProduct(id));
         }
 
-        //gets the current item list storaged in cookies and updates it when an item is added
-        //goes first to available items action
-        [AllowAnonymous]
-        public IActionResult AddToCart(int id, State productState)
-        {
-            if (productState == State.Available)
-            {
-                _productRepository.UpdateProductState(id);
-
-                HashSet<int> cartProductsId;
-                string productsCookiesJson = Request.Cookies["UserProducts"];
-                if (string.IsNullOrWhiteSpace(productsCookiesJson))
-                {
-                    cartProductsId = new HashSet<int>();
-                }
-                else
-                {
-                    cartProductsId = JsonConvert.DeserializeObject<HashSet<int>>(productsCookiesJson);
-                }
-
-                cartProductsId.Add(id);
-                Response.Cookies.Append("UserProducts",
-                    JsonConvert.SerializeObject(cartProductsId),
-                    new CookieOptions { MaxAge = TimeSpan.FromHours(1) });
-            }
-            else
-            {
-                ViewBag.ErrorMessage = "sorry, the item is not availalbe at the moment";
-            }
-            return RedirectToAction("AvailableItems", "Home");
-
-        }
+ 
 
         public IActionResult AddNewAdvertisement()
         {

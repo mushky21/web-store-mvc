@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -23,46 +24,54 @@ namespace webStoreFinal.Controllers
 
         public IActionResult ShowCart()
         {
-            HashSet<int> cartProductsId;
-            string productsCookiesJson = Request.Cookies["UserProducts"];
-            if (string.IsNullOrWhiteSpace(productsCookiesJson))
-            {
-                cartProductsId = new HashSet<int>();
-            }
-            else
-            {
-                cartProductsId = JsonConvert.DeserializeObject<HashSet<int>>(productsCookiesJson);
-            }
-            List<Product> currentCart = _productRepository.ShowCart(cartProductsId);
-
+            List<Product> currentCart = _productRepository.ShowCart(_cartService.ProductsInCookies());
             return View(currentCart);//לא ממשנו רק יצרנו את הדף של זה
         }
 
         public IActionResult RemoveFromCart(int id)
         {
-            HashSet<int> cartProductsId;
-            string productsCookiesJson = Request.Cookies["UserProducts"];
-            cartProductsId = JsonConvert.DeserializeObject<HashSet<int>>(productsCookiesJson);
-            cartProductsId.Remove(id);
+            //HashSet<int> cartProductsId;
+            //string productsCookiesJson = Request.Cookies["UserProducts"];
+            //cartProductsId = JsonConvert.DeserializeObject<HashSet<int>>(productsCookiesJson);
+            //cartProductsId.Remove(id);
+            HashSet<int> cartProductsId = _cartService.RemoveProductFromCookie(id);
+            _productRepository.UpdateProductState(id,State.Available);
 
-            Response.Cookies.Append("UserProducts",
-            JsonConvert.SerializeObject(cartProductsId),
-            new CookieOptions { MaxAge = TimeSpan.FromHours(1) });
             return View("ShowCart", _productRepository.ShowCart(cartProductsId));
 
         }
 
-        [HttpPost]
-        public IActionResult CompletePurchase(List<double> prices)
+        //gets the current item list storaged in cookies and updates it when an item is added
+        //goes first to available items action
+        [AllowAnonymous]
+        public IActionResult AddToCart(int id, State productState)
         {
-            double visitorPrice = _cartService.VisitorCartSum(prices);
-            double memberPrice = _cartService.MemberCartSum(prices);
+            if (productState == State.Available)
+            {
+                _productRepository.UpdateProductState(id,State.InCart);
+                _cartService.AddProductToCookie(id);
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "sorry, the item is not availalbe at the moment";
+            }
+            return RedirectToAction("AvailableItems", "Home");
 
-            TempData["visitorPrice"] = visitorPrice;
-            TempData["memberPrice"] = memberPrice;
-
-
-            return RedirectToAction("ShowCart");
         }
+
+        //need to change...
+        //[HttpPost]
+        //public IActionResult CompletePurchase()
+        //{
+        //    double visitorPrice = _cartService.VisitorCartSum(prices);
+        //    double memberPrice = _cartService.MemberCartSum(prices);
+
+        //    TempData["visitorPrice"] = visitorPrice;
+        //    TempData["memberPrice"] = memberPrice;
+
+
+        //    return RedirectToAction("ShowCart");
+        //}
+
     }
 }
