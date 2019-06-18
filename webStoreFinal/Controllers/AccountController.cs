@@ -29,7 +29,7 @@ namespace webStoreFinal.Controllers
             }
             else
             {
-                TempData["LoginFailed"] = login;
+                TempData["LoginError"] = "The username or password are incorrect";
                 return RedirectToAction("AvailableItems", "Home");//??maybe to current page!
 
                 //need to show error message of "the user name or password are incorrect"

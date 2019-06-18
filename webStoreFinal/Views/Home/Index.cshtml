@@ -7,20 +7,12 @@
 <hr />
 <p>
     <div>
-        @{
-        Login LoginFailed = ViewBag.LoginFailed;
-        }
+      
+        <div>ViewBag.LoginError</div>
+     
         @section Login{
-            @if (LoginFailed != null)
-            {
-                @await Html.PartialAsync("_LoginPartialView",LoginFailed as Login);
-
-            }
-            else
-            {
                 @await Html.PartialAsync("_LoginPartialView");
             }
-        }
     </div>
     <div>
         your messages here:
