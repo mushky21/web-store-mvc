@@ -7,6 +7,13 @@
 <div>
     @if (!User.Identity.IsAuthenticated)
     {
+        //if user executed invalid login - the action navigated again to partial view with error and login object from previous login
+        if (Model!=null)
+        {
+            <div>
+                The username or password are incorrect
+            </div>
+        }
         <form asp-action="Login" asp-controller="Account">
             <div>
                 <label asp-for="Username"></label>

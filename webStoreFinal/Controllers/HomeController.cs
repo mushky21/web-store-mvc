@@ -33,6 +33,7 @@ namespace webStoreFinal.Controllers
 
         public IActionResult AvailableItems()
         {
+            if (TempData["LoginFailed"] != null) ViewBag.LoginFailed = TempData["LoginFailed"];
             return View("Index", _productRepository.AvailableItems());
         }
 
