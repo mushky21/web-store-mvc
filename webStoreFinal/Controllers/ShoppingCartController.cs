@@ -30,10 +30,6 @@ namespace webStoreFinal.Controllers
 
         public IActionResult RemoveFromCart(int id)
         {
-            //HashSet<int> cartProductsId;
-            //string productsCookiesJson = Request.Cookies["UserProducts"];
-            //cartProductsId = JsonConvert.DeserializeObject<HashSet<int>>(productsCookiesJson);
-            //cartProductsId.Remove(id);
             HashSet<int> cartProductsId = _cartService.RemoveProductFromCookie(id);
             _productRepository.UpdateProductState(id,State.Available);
 
