@@ -13,13 +13,11 @@ namespace webStoreFinal.Controllers
 {
     public class HomeController : Controller
     {
-        private SignInManager<MyUser> _signInManager;
         private IProductRepository _productRepository;
 
-        public HomeController(IProductRepository productRepository,SignInManager<MyUser> signInManager)
+        public HomeController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
-            _signInManager = signInManager;
         }
 
         //public IActionResult Index(string key) //shows the items according to the wanted order by method.
