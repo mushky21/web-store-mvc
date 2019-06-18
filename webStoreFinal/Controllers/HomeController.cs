@@ -75,7 +75,7 @@ namespace webStoreFinal.Controllers
                 _productRepository.AddProduct(product);
                 ViewBag.ItemAdded = "the item was published successfully";
             }
-            return View();//navigated to AddNewAdvertisement view
+            return View();
 
         }
 
