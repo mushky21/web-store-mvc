@@ -51,6 +51,7 @@ namespace webStoreFinal.Controllers
             return View("ShowCart", _productRepository.ShowCart(cartProductsId));
 
         }
+
         [HttpPost]
         public IActionResult CompletePurchase(List<double> prices)
         {
