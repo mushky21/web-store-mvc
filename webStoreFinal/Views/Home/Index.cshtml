@@ -8,10 +8,10 @@
 <p>
     <div>
       
-        <div>ViewBag.LoginError</div>
+
      
         @section Login{
-                @await Html.PartialAsync("_LoginPartialView");
+                @await Html.PartialAsync("_LoginPartialView",new Login());
             }
     </div>
     <div>
@@ -19,6 +19,7 @@
     </div>
     <div class="ErrorMessages">
         @ViewBag.ErrorMessage
+            <div>@ViewBag.LoginError</div>
     </div>
 
     <div class="buttons">
