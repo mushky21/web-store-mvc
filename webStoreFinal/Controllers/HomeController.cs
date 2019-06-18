@@ -106,7 +106,7 @@ namespace webStoreFinal.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            Response.Cookies.Delete("UserProducts");
+            Response.Cookies.Delete("Microsoft.AspNetCore.Identity");//check!!
             return RedirectToAction("AvailableItems");
         }
     }
