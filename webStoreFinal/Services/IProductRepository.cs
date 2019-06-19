@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace webStoreFinal.Services
     {
         List<Product> Products();
         Product FindProduct(int productId);
-        bool AddProduct(Product newProduct);
+        Task<bool> AddProduct(Product newProduct, IFormFile [] pictures);
         bool RemoveProduct(int productId);
         bool UpdateProductBuyer(int productId, int buyerId);
         bool UpdateProductState(int id,State state);

@@ -19,9 +19,12 @@
             <a asp-action="AvailableItems" asp-controller="Home">Return to HomePage</a>
         }
     </div>
+    <div>
+
+    </div>
 
 
-    <form asp-action="AddNewAdvertisement" method="post">
+    <form asp-action="AddNewAdvertisement" method="post" enctype="multipart/form-data">
         <div>
             <label asp-for="Title"></label>
             <input asp-for="Title" />
@@ -42,14 +45,18 @@
             <input asp-for="Price" />
             <span asp-validation-for="Price"></span>
         </div>
+        <div>
+            <input type="file" name="pictures" multiple>
+        </div>
+        <div>
+            @ViewBag.PictureError
+        </div>
 
-        @*<div>@Model.Photo1</div>
-            <div>@Model.Photo2</div>
-            <div>@Model.Photo3</div>*@
         <input type="submit" value="Save " />
         <div asp-validation-summary="All">
 
 
         </div>
+
     </form>
 </body>

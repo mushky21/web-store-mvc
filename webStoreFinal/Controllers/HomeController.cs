@@ -70,14 +70,23 @@ namespace webStoreFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddNewAdvertisement(Product product)
+        public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[]pictures)
         {
             if (ModelState.IsValid)
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
                 product.SellerId = userAuthenticated.Id;
-                _productRepository.AddProduct(product);
-                ViewBag.ItemAdded = "the item was published successfully";
+                if (pictures.Length <3)
+                {
+                    _productRepository.AddProduct(product, pictures);
+                    ViewBag.ItemAdded = "the item was published successfully";
+                }
+                else
+                {
+                    ViewBag.PictureError = "please enter up to 3 pictures only";
+                }
+                
+
             }
             return View();
 

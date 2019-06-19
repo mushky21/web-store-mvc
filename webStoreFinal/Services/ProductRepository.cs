@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using webStoreFinal.Data;
@@ -22,9 +24,33 @@ namespace webStoreFinal.Services
             return foundProduct;
         }
 
-        public bool AddProduct(Product newProduct)
+        public async Task<bool> AddProduct(Product newProduct, IFormFile [] pictures)
         {
+            for (int i = 0; i < pictures.Length; i++)
+            {
+                using (var msStream = new MemoryStream())
+                {
+                    if (pictures[i] != null)
+                    {
+                        await pictures[i].CopyToAsync(msStream);
+                        if (i==0)
+                        {
+                            newProduct.Photo1 = msStream.ToArray();
+                        }
+                        else if (i == 1)
+                        {
+                            newProduct.Photo2 = msStream.ToArray();
+                        }
+                        if (i == 2)
+                        {
+                            newProduct.Photo3 = msStream.ToArray();
+                        }
+
+                    }
+                }
+            }
             _storeDbContext.Products.Add(newProduct);
+     
             int addedRows = _storeDbContext.SaveChanges();
             return addedRows > 0;
         }
