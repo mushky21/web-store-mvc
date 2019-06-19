@@ -58,7 +58,7 @@ namespace webStoreFinal.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost]//check if to do async
         public IActionResult CompletePurchase()
         {
             _cartService.CompletePurchase();

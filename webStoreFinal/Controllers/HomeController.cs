@@ -16,12 +16,13 @@ namespace webStoreFinal.Controllers
     public class HomeController : Controller
     {
         private IProductRepository _productRepository;
+        private IUserRepository _userRepository;
     
 
-        public HomeController(IProductRepository productRepository)
+        public HomeController(IProductRepository productRepository, IUserRepository userRepository)
         {
             _productRepository = productRepository;
-            MyUser user = new MyUser();
+            _userRepository = userRepository;
         }
        
 
@@ -69,10 +70,12 @@ namespace webStoreFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AddNewAdvertisement(Product product)
+        public async Task<IActionResult> AddNewAdvertisement(Product product)
         {
             if (ModelState.IsValid)
             {
+                MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
+                product.SellerId = userAuthenticated.Id;
                 _productRepository.AddProduct(product);
                 ViewBag.ItemAdded = "the item was published successfully";
             }
