@@ -34,7 +34,7 @@ namespace webStoreFinal
 
 
             services.AddDbContext<myStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<MyUser, IdentityRole>()
+            services.AddIdentity<MyUser, IdentityRole<int>>()
            .AddEntityFrameworkStores<myStoreDbContext>();
 
             services.AddMvc();

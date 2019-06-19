@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,9 +47,9 @@ namespace webStoreFinal.Services
             return null;
         }
 
-        public async Task<MyUser> FindUserById(string userId)
+        public async Task<MyUser> FindUserById(int userId)
         {
-            return await _userManager.FindByIdAsync(userId);
+            return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
         public async Task<IdentityResult> UpdateUser(Update updateData)

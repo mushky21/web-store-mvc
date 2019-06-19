@@ -15,7 +15,7 @@ namespace webStoreFinal.Controllers
     {
         private ICartService _cartService;
 
-        public ShoppingCartController(IProductRepository productRepository, ICartService cartService)
+        public ShoppingCartController(ICartService cartService)
         {
             _cartService = cartService;
         }
@@ -61,9 +61,8 @@ namespace webStoreFinal.Controllers
         [HttpPost]
         public IActionResult CompletePurchase()
         {
-            if(User.Identity.IsAuthenticated) 
             _cartService.CompletePurchase();
-            return RedirectToAction("ShowCart");
+            return View();
         }
 
     }

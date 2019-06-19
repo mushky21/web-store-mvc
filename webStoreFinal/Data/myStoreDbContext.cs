@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using webStoreFinal.Models;
 
 namespace webStoreFinal.Data
 {
-    public class myStoreDbContext : IdentityDbContext<MyUser>
+    public class myStoreDbContext : IdentityDbContext<MyUser,IdentityRole<int>,int>
     {
         public myStoreDbContext(DbContextOptions<myStoreDbContext> options) : base(options)
         {

@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using webStoreFinal.Models;
@@ -12,11 +15,13 @@ namespace webStoreFinal.Services
     {
         private IHttpContextAccessor _httpContextAccessor;
         private IProductRepository _productRepository;
+        private IUserRepository _userRepository;
 
-        public CartService(IHttpContextAccessor httpContextAccessor, IProductRepository productRepository)
+        public CartService(IHttpContextAccessor httpContextAccessor, IProductRepository productRepository, IUserRepository userRepository)
         {
             _httpContextAccessor = httpContextAccessor;
             _productRepository = productRepository;
+            _userRepository = userRepository;
         }
 
         public List<Product> ShowCart()
@@ -85,19 +90,40 @@ namespace webStoreFinal.Services
             _productRepository.UpdateProductState(id, State.InCart);
         }
 
-        public void CompletePurchase()
+        //get the cart from cookie, updates state (and buyer id if user is authenticated) and delete from cookies all cart
+        public async void CompletePurchase()
         {
-           //get from cookies
-            HashSet<int> cartProductsId=ProductsInCookies();
-
-           //update all products by state of buyed
-           foreach(var productId in cartProductsId)
+            HashSet<int> cartProductsId = ProductsInCookies();
+            MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
+            if (userAuthenticated != null)
+                CompletePurchaseForMember(userAuthenticated.Id, cartProductsId);
+            else
             {
-                _productRepository.UpdateProductBuyer()
+                CompletePurchaseForVisitor(cartProductsId);
+
             }
 
-           //ovveride cart in empty string or delete?
+            _httpContextAccessor.HttpContext.Response.Cookies.Delete("UserProducts");
+        }
 
+        //update status of purchased and buyer id for each product in cart
+        private void CompletePurchaseForMember(int buyerId, HashSet<int> cartProductsId)
+        {
+            foreach (var productId in cartProductsId)
+            {
+                _productRepository.UpdateProductBuyer(productId, buyerId);
+                _productRepository.UpdateProductState(productId, State.Purchased);
+            }
+        }
+
+        //update status of purchased for each product in cart
+        private void CompletePurchaseForVisitor(HashSet<int> cartProductsId)
+        {
+            foreach (var productId in cartProductsId)
+            {
+                _productRepository.UpdateProductState(productId, State.Purchased);
+            }
         }
     }
 }
+

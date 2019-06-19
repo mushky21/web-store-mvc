@@ -12,7 +12,8 @@ namespace webStoreFinal.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -26,7 +27,8 @@ namespace webStoreFinal.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -56,7 +58,7 @@ namespace webStoreFinal.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    RoleId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -77,7 +79,7 @@ namespace webStoreFinal.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true)
                 },
@@ -99,7 +101,7 @@ namespace webStoreFinal.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
+                    UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -116,8 +118,8 @@ namespace webStoreFinal.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
+                    UserId = table.Column<int>(nullable: false),
+                    RoleId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -140,7 +142,7 @@ namespace webStoreFinal.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
                     LoginProvider = table.Column<string>(nullable: false),
                     Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
@@ -162,9 +164,7 @@ namespace webStoreFinal.Migrations
                 {
                     ProductKey = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    SellerId1 = table.Column<string>(nullable: true),
                     SellerId = table.Column<int>(nullable: true),
-                    BuyerId1 = table.Column<string>(nullable: true),
                     BuyerId = table.Column<int>(nullable: true),
                     Title = table.Column<string>(maxLength: 10, nullable: false),
                     ShortDescription = table.Column<string>(maxLength: 20, nullable: false),
@@ -179,14 +179,14 @@ namespace webStoreFinal.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductKey);
                     table.ForeignKey(
-                        name: "FK_Products_AspNetUsers_BuyerId1",
-                        column: x => x.BuyerId1,
+                        name: "FK_Products_AspNetUsers_BuyerId",
+                        column: x => x.BuyerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Products_AspNetUsers_SellerId1",
-                        column: x => x.SellerId1,
+                        name: "FK_Products_AspNetUsers_SellerId",
+                        column: x => x.SellerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -232,14 +232,14 @@ namespace webStoreFinal.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_BuyerId1",
+                name: "IX_Products_BuyerId",
                 table: "Products",
-                column: "BuyerId1");
+                column: "BuyerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_SellerId1",
+                name: "IX_Products_SellerId",
                 table: "Products",
-                column: "SellerId1");
+                column: "SellerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

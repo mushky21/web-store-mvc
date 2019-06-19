@@ -21,6 +21,7 @@ namespace webStoreFinal.Controllers
         public HomeController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
+            MyUser user = new MyUser();
         }
        
 
