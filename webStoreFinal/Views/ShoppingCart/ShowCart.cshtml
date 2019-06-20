@@ -13,7 +13,7 @@
 <body>
     <div>
         @section Login{
-            @await Html.PartialAsync("_LoginPartialView")
+            @await Html.PartialAsync("_LoginPartialView", new Login())
         }
     </div>
     <div class="pageContent">

@@ -14,7 +14,7 @@
 <body>
     <div>
         @section Login{
-            @await Html.PartialAsync("_LoginPartialView")
+            @await Html.PartialAsync("_LoginPartialView", new Login())
         }
     </div>
     @*missing:need to check how to display red asterik instead of error massege,for each field*@
