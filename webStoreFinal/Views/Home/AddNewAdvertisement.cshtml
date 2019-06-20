@@ -11,11 +11,9 @@
 </head>
 <body>
     <div>
-        @if (Model != null)
+        @if (ViewBag.ItemAdded != null)
         {
-            <div>
-                @ViewBag.ItemAdded
-            </div>
+            <div>@ViewBag.ItemAdded</div>
             <a asp-action="AvailableItems" asp-controller="Home">Return to HomePage</a>
         }
     </div>
