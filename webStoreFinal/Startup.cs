@@ -47,7 +47,7 @@ namespace webStoreFinal
             {
                 app.UseDeveloperExceptionPage();
             }
-            myStoreDb.Database.EnsureCreated();
+            //myStoreDb.Database.EnsureCreated();
             app.UseStaticFiles();
             app.UseAuthentication();
            // app.UseMvcWithDefaultRoute();
