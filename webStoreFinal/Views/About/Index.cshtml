@@ -4,8 +4,12 @@
 
 
 
+@section Title{
+    @await Html.PartialAsync("_TitlePartialView");
+}
 <div>
     @section Login{
         @await Html.PartialAsync("_LoginPartialView")
     }
 </div>
+

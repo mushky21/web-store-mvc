@@ -22,6 +22,7 @@ namespace webStoreFinal.Controllers
 
         public IActionResult ShowCart()
         {
+            ViewBag.pageName = "Current Cart Content";
             List<Product> currentCart = _cartService.ShowCart();
 
             double visitorPrice = _cartService.VisitorCartSum(currentCart);
@@ -30,7 +31,7 @@ namespace webStoreFinal.Controllers
             TempData["visitorPrice"] = visitorPrice;
             TempData["memberPrice"] = memberPrice;
 
-            return View(currentCart);//לא ממשנו רק יצרנו את הדף של זה
+            return View(currentCart);
         }
 
         public IActionResult RemoveFromCart(int id)
@@ -61,6 +62,7 @@ namespace webStoreFinal.Controllers
         [HttpPost]//check if to do async
         public IActionResult CompletePurchase()
         {
+            ViewBag.pageName = "Purchase Summary";
             _cartService.CompletePurchase();
             return View();
         }

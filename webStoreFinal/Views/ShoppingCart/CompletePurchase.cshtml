@@ -11,6 +11,15 @@
     <title>CompletePurchase</title>
 </head>
 <body>
+    @section Title{
+        @await Html.PartialAsync("_TitlePartialView")
+    }
+    <div>
+
+        @section Login{
+            @await Html.PartialAsync("_LoginPartialView", new Login())
+        }
+    </div>
     <p>
         Purchase process completed successfully.
         You are welcome to purchase additional products and enjoy a perfect shopping experience!

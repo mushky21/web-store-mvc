@@ -3,23 +3,25 @@
     ViewData["Title"] = "Index";
 }
 <br />
-<h2>Home Page</h2>
+
 <hr />
 <p>
-    <div>
-      
 
-     
+    @section Title{
+        @await Html.PartialAsync("_TitlePartialView");
+    }
+    <div>
+
         @section Login{
-                @await Html.PartialAsync("_LoginPartialView",new Login());
-            }
+            @await Html.PartialAsync("_LoginPartialView", new Login());
+        }
     </div>
     <div>
         your messages here:
     </div>
     <div class="ErrorMessages">
         @ViewBag.ErrorMessage
-            <div>@ViewBag.LoginError</div>
+        <div>@ViewBag.LoginError</div>
     </div>
 
     <div class="buttons">

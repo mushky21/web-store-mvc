@@ -10,9 +10,15 @@
 
 </head>
 <body>
-    @section Login{
-        @await Html.PartialAsync("_LoginPartialView", new Login())
+    @section Title{
+        @await Html.PartialAsync("_TitlePartialView");
     }
+
+
+    @* פה בהכרח המשתמש עבר לוגין ולכן אין צורך להציג את הסקשן הזה  *@
+    @*@section Login{
+            @await Html.PartialAsync("_LoginPartialView", new Login())
+        }*@
     <div>
         @if (ViewBag.ItemAdded != null)
         {

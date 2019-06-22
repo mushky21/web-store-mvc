@@ -10,6 +10,7 @@ namespace webStoreFinal.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.pageName = "About Us";
             return View();
         }
     }

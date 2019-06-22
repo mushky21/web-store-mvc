@@ -41,6 +41,7 @@ namespace webStoreFinal.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(Register registerData)
         {
+            ViewBag.pageName = "Registration Page";
             if (ModelState.IsValid)
             {
                 var result =await _userRepository.AddUser(registerData);

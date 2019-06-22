@@ -11,36 +11,54 @@
     <link href="~/StyleSheet.css" rel="stylesheet" />
 </head>
 
+
+
 <body>
-    <div class="top">
-        @ViewBag.pageName
-        <img src="pineapple.jpg" alt="Pineapple">
+    <div class="alert alert-primary" role="alert">
+        @if (IsSectionDefined("Title"))
+        {
+            @RenderSection("Title");
+        }
+
+    </div>
+
+    <div class="log-in">
+        @if (IsSectionDefined("login"))
+        {
+            RenderSection("Login")
+        }
+        @if (IsSectionDefined("Greetings"))
+        {
+            RenderSection("Greetings")
+        }
     </div>
 
 
-    <div class="right-side">
-        <div class="log-in">
-            @if (IsSectionDefined("login"))
-            {
-                RenderSection("Login");
-            }
-            @if (IsSectionDefined("Greetings"))
-            {
-                RenderSection("Greetings");
-            }
+        <div class="content">
+            <nav class="navbar navbar-light bg-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a asp-action="AvailableItems" asp-controller="home" class="nav-link">Main Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="ShowCart" asp-controller="ShoppingCart" class="nav-link">Shopping cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Register" asp-controller="Register" class="nav-link">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-action="Index" asp-controller="About" class="nav-link">About</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-        <nav class="nav-bar">
-            <ul>
-                <li><a asp-action="AvailableItems" asp-controller="home">Main Page</a></li>
-                <li><a asp-action="ShowCart" asp-controller="ShoppingCart">Shopping cart</a></li>
-                <li><a asp-action="Register" asp-controller="Rgister">Register</a></li>
-                <li><a asp-action="Index" asp-controller="About">About</a></li>
-            </ul>
 
-        </nav>
-    </div>
-    <div class="left-side">
-        @RenderBody()
+        <div class="content">
+            <div>
+                @RenderBody()
+            </div>
 
-    </div>
+        </div>
+
+
 </body>

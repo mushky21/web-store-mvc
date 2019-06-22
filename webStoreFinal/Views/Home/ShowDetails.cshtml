@@ -4,6 +4,16 @@
 @model Product
 <h2>Additional Details</h2>
 
+@section Title{
+    @await Html.PartialAsync("_TitlePartialView");
+}
+<div>
+
+    @section Login{
+        @await Html.PartialAsync("_LoginPartialView", new Login());
+    }
+</div>
+
 <div class="moreDetails">
     <div class="itemDetails">
         <div>@Model.Title</div>

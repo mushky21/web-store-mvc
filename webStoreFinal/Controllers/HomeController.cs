@@ -39,6 +39,7 @@ namespace webStoreFinal.Controllers
         [AllowAnonymous]
         public IActionResult AvailableItems()
         {
+            ViewBag.pageName = "HOME PAGE";
             if (TempData["LoginError"] != null) ViewBag.LoginError = TempData["LoginError"];
             return View("Index", _productRepository.AvailableItems());
         }
@@ -58,6 +59,7 @@ namespace webStoreFinal.Controllers
         [AllowAnonymous]
         public IActionResult ShowDetails(int id)
         {
+            ViewBag.pageName = "More Details";
             return View(_productRepository.FindProduct(id));
         }
 
@@ -65,6 +67,7 @@ namespace webStoreFinal.Controllers
 
         public IActionResult AddNewAdvertisement()
         {
+            ViewBag.pageName = "Add New Advertisement";
             return View();//navigated to AddNewAdvertisement view
         }
 
@@ -72,6 +75,7 @@ namespace webStoreFinal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[]pictures)
         {
+            ViewBag.pageName = "Add New Advertisement";
             if (ModelState.IsValid)
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
