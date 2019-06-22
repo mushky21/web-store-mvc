@@ -36,6 +36,7 @@ namespace webStoreFinal.Controllers
         //    //}
         //    return View(myProductsList);
         //}
+
         [AllowAnonymous]
         public IActionResult AvailableItems()
         {
@@ -63,16 +64,18 @@ namespace webStoreFinal.Controllers
             return View(_productRepository.FindProduct(id));
         }
 
- 
-
+        //a method only authorized users can have access to
+        //   suggestion:     [Authorize(Roles ="SignedInUser")]
         public IActionResult AddNewAdvertisement()
         {
             ViewBag.pageName = "Add New Advertisement";
             return View();//navigated to AddNewAdvertisement view
         }
 
+        //a method only authorized users can have access to
         [HttpPost]
         [ValidateAntiForgeryToken]
+        //    suggestion:    [Authorize(Roles ="SignedInUser")]
         public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[]pictures)
         {
             ViewBag.pageName = "Add New Advertisement";
@@ -82,7 +85,7 @@ namespace webStoreFinal.Controllers
                 product.SellerId = userAuthenticated.Id;
                 if (pictures.Length <3)
                 {
-                    _productRepository.AddProduct(product, pictures);
+                   await _productRepository.AddProduct(product, pictures);
                     ViewBag.ItemAdded = "the item was published successfully";
                 }
                 else

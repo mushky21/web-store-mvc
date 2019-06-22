@@ -15,6 +15,11 @@ namespace webStoreFinal.Data
         {
 
         }
+        //the synthax dolve used in the identity project
+        //    public class myStoreDbContext: IdentityDbContext<MyUser>{
+        //public myStoreDbContext(DbContextOptions options) : base(options)
+        //{
+        //}}
         public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
