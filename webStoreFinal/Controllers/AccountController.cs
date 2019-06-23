@@ -25,7 +25,6 @@ namespace webStoreFinal.Controllers
             if (result.Succeeded)
             {
                 return RedirectToAction("AvailableItems", "Home");
-
             }
             else
             {
