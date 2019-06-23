@@ -22,42 +22,42 @@ namespace webStoreFinal.Data
         //}}
         public DbSet<Product> Products { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            //defining new products
-            //builder.Entity<Product>().HasData(
-            //    new Product {ProductKey=1, Title="Fridge", Price=1000, ProductState=State.Available, ShortDescription="25 liter second hand fridge",
-            //        LongDescription ="white, as good as new, great for cooling your food and drinks," +
-            //        "fits to a medium family " });
+    //    protected override void OnModelCreating(ModelBuilder builder)
+    //    {
+    //        //defining new products
+    //        //builder.Entity<Product>().HasData(
+    //        //    new Product {ProductKey=1, Title="Fridge", Price=1000, ProductState=State.Available, ShortDescription="25 liter second hand fridge",
+    //        //        LongDescription ="white, as good as new, great for cooling your food and drinks," +
+    //        //        "fits to a medium family " });
 
 
-            //properties to add: seller, sellerId, buyer, buyer id, photos, 
+    //        //properties to add: seller, sellerId, buyer, buyer id, photos, 
 
 
 
 
-            //defining pk (not sure that we need this since we used the [key] attribute in the model properties)
-            //builder.Entity<Product>(entity =>
-            //{
-            //    entity.HasKey("ProductKey");
-            //});
+    //        //defining pk (not sure that we need this since we used the [key] attribute in the model properties)
+    //        //builder.Entity<Product>(entity =>
+    //        //{
+    //        //    entity.HasKey("ProductKey");
+    //        //});
 
-            ////defining fk (not finished):
-            //builder.Entity<Product>(entity =>
-            //{
-            //    entity.HasMany
-            //});
+    //        ////defining fk (not finished):
+    //        //builder.Entity<Product>(entity =>
+    //        //{
+    //        //    entity.HasMany
+    //        //});
             
 
-        //NOT REQUIRED configures foreign key
-        //modelBuilder.Entity<Product>(entity =>
-        //{
-        //    entity.HasOne(p => p.Brand)
-        //        .WithMany(b => b.Products)
-        //        .HasForeignKey("BrandId");
-        //});
+    //    //NOT REQUIRED configures foreign key
+    //    //modelBuilder.Entity<Product>(entity =>
+    //    //{
+    //    //    entity.HasOne(p => p.Brand)
+    //    //        .WithMany(b => b.Products)
+    //    //        .HasForeignKey("BrandId");
+    //    //});
 
-    }
+    //}
 
 
     }
