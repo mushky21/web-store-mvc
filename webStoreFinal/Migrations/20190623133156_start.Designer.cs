@@ -10,14 +10,14 @@ using webStoreFinal.Data;
 namespace webStoreFinal.Migrations
 {
     [DbContext(typeof(myStoreDbContext))]
-    [Migration("20190619125627_first")]
-    partial class first
+    [Migration("20190623133156_start")]
+    partial class start
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.3-rtm-32065")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
