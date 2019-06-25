@@ -25,7 +25,9 @@
     else
     {
         var userAuthenticated = await UserRepository.FindUserAuthenticated();
+
         <div>
+
             hello, @userAuthenticated.FirstName -
             @userAuthenticated.LastName
         </div>
