@@ -27,9 +27,9 @@
         var userAuthenticated = await UserRepository.FindUserAuthenticated();
 
         <div>
-
-            hello, @userAuthenticated.FirstName -
-            @userAuthenticated.LastName
+            @await Component.InvokeAsync("LoginViewComponent"),
+            @userAuthenticated.FirstName  @userAuthenticated.LastName
         </div>
+        
     }
 </div>

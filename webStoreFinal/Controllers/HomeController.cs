@@ -48,12 +48,14 @@ namespace webStoreFinal.Controllers
         [AllowAnonymous]
         public IActionResult OrderByDate()
         {
+            ViewBag.pageName = "HOME PAGE";
             return View("Index", _productRepository.OrderByDate());
         }
 
         [AllowAnonymous]
         public IActionResult OrderByTitle()
         {
+            ViewBag.pageName = "HOME PAGE";
             return View("Index", _productRepository.OrderByTitle());
         }
 
