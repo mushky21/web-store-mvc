@@ -46,20 +46,10 @@ namespace webStoreFinal.Controllers
             if (isFirstVisit)
             {
                 isFirstVisit = true;
-                string username;
-                Request.Cookies.TryGetValue("AspNetCore.Application.Identity", out username);
-                if (username != null)
-                {
-                    MyUser userLogin = await _userRepository.FindUserByName(username);
-                    Login login = new Login()
-                    {
-                        Password = userLogin.PasswordHash,
-                        Username = username
 
-                    };
-
-                    RedirectToAction("Login", "Account", login);//sign in user
-                }
+                Login userLogin = await _userRepository.RecognizeUser();
+                if (userLogin != null)
+                    RedirectToAction("Login", "Account", userLogin);//sign in user
             }
 
             ViewBag.pageName = "HOME PAGE";

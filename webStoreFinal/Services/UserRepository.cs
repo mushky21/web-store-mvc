@@ -57,6 +57,24 @@ namespace webStoreFinal.Services
            return await _userManager.FindByNameAsync(username);
         }
 
+        public async Task<Login> RecognizeUser()
+        {
+            string username;
+            _httpContextAccessor.HttpContext.Request.Cookies.TryGetValue("AspNetCore.Application.Identity", out username);
+            if (username != null)
+            {
+                MyUser userLogin = await FindUserByName(username);
+                Login login = new Login()
+                {
+                    Password = userLogin.PasswordHash,
+                    Username = username
+
+                };
+                return login;
+            }
+            return null;
+        }
+
         public async Task<IdentityResult> UpdateUser(Update updateData)
         {
             //check if user changed his password
@@ -80,5 +98,7 @@ namespace webStoreFinal.Services
         {
             return _userManager.Users.ToList();
         }
+
+
     }
 }

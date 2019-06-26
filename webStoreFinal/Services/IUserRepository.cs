@@ -15,6 +15,7 @@ namespace webStoreFinal.Services
         Task<IdentityResult> AddUser(Register registerData);
         Task<IdentityResult> UpdateUser(Update updateData);
         Task<MyUser> FindUserByName(string username);
+        Task<Login> RecognizeUser();
 
         // bool RemoveUser(int userId);//not in the specfication
     }
