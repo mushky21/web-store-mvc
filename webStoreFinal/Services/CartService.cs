@@ -9,6 +9,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using webStoreFinal.Models;
 
+
+
 namespace webStoreFinal.Services
 {
     public class CartService : ICartService
@@ -26,7 +28,7 @@ namespace webStoreFinal.Services
 
         public List<Product> ShowCart()
         {
-            HashSet<int> cartProductsId = ProductsInCookies();
+            HashSet<int> cartProductsId = ProductsInCart();
             var products = from product in _productRepository.Products() //ברפוזיטורי  מחזירים רשימת אוביקטים מסוג מוצר
                            where cartProductsId.Contains(product.ProductKey) // מחפשים את המוצרים שנמצאים בפרמטר שקיבלתי למתודה -משמע מה שנמצא לי בעגלה
                            select product;
@@ -44,7 +46,7 @@ namespace webStoreFinal.Services
         }
 
         //get the hashset of products (which contain for the id for each product) from cookies
-        public HashSet<int> ProductsInCookies()
+        public HashSet<int> ProductsInCart()
         {
             HashSet<int> cartProductsId;
             string productsCookiesJson = _httpContextAccessor.HttpContext.Request.Cookies["UserProducts"];
@@ -63,7 +65,7 @@ namespace webStoreFinal.Services
         //remove product and update cookie,change state and return the updated hashset 
         public HashSet<int> RemoveProduct(int id)
         {
-            HashSet<int> cartProductsId = ProductsInCookies();
+            HashSet<int> cartProductsId = ProductsInCart();
             cartProductsId.Remove(id);
             UpdateCartInCookies(cartProductsId);
             //update state
@@ -71,19 +73,11 @@ namespace webStoreFinal.Services
             return cartProductsId;
         }
 
-        //update the cart in cookies with new hashset
-        public void UpdateCartInCookies(HashSet<int> cartProductsId)
-        {
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("UserProducts",
-           JsonConvert.SerializeObject(cartProductsId),
-           new CookieOptions { MaxAge = TimeSpan.FromHours(1) });
-        }
-
         //get products from cookie and add the is to hashset
         //update cookie with updated hashset
         public void AddProduct(int id)
         {
-            HashSet<int> cartProductsId = ProductsInCookies();
+            HashSet<int> cartProductsId = ProductsInCart();
             cartProductsId.Add(id);
             UpdateCartInCookies(cartProductsId);
 
@@ -93,7 +87,7 @@ namespace webStoreFinal.Services
         //get the cart from cookie, updates state (and buyer id if user is authenticated) and delete from cookies all cart
         public async void CompletePurchase()
         {
-            HashSet<int> cartProductsId = ProductsInCookies();
+            HashSet<int> cartProductsId = ProductsInCart();
             MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
             if (userAuthenticated != null)
                 CompletePurchaseForMember(userAuthenticated.Id, cartProductsId);
@@ -123,6 +117,13 @@ namespace webStoreFinal.Services
             {
                 _productRepository.UpdateProductState(productId, State.Purchased);
             }
+        }
+
+        //update the cart in cookies with new hashset
+        private void UpdateCartInCookies(HashSet<int> cartProductsId)
+        {
+            _httpContextAccessor.HttpContext.Response.Cookies.Append("UserProducts",
+           JsonConvert.SerializeObject(cartProductsId));
         }
     }
 }

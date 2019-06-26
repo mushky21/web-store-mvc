@@ -12,8 +12,7 @@ namespace webStoreFinal.Services
         double MemberCartSum(List<Product> products);
 
         List<Product> ShowCart();
-        void UpdateCartInCookies(HashSet<int> cartProductsId);
-        HashSet<int> ProductsInCookies();
+        HashSet<int> ProductsInCart();
         HashSet<int> RemoveProduct(int id);
         void AddProduct(int id);
         void CompletePurchase();
