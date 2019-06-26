@@ -52,6 +52,11 @@ namespace webStoreFinal.Services
             return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }
 
+        public async Task<MyUser> FindUserByName(string username)
+        {
+           return await _userManager.FindByNameAsync(username);
+        }
+
         public async Task<IdentityResult> UpdateUser(Update updateData)
         {
             //check if user changed his password

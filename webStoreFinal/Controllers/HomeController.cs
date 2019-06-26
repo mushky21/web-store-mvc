@@ -17,14 +17,15 @@ namespace webStoreFinal.Controllers
     {
         private IProductRepository _productRepository;
         private IUserRepository _userRepository;
-    
+        private static bool isFirstVisit = true;//check if it is first visit in this page, for this browsing
+
 
         public HomeController(IProductRepository productRepository, IUserRepository userRepository)
         {
             _productRepository = productRepository;
             _userRepository = userRepository;
         }
-       
+
 
         //public IActionResult Index(string key) //shows the items according to the wanted order by method.
         //{
@@ -38,8 +39,29 @@ namespace webStoreFinal.Controllers
         //}
 
         [AllowAnonymous]
-        public IActionResult AvailableItems()
+        public async Task<IActionResult> AvailableItems()
         {
+            //try sign in user, if his username is exist in cookies
+            //only, at the first time, user enter to this page, for each browsing
+            if (isFirstVisit)
+            {
+                isFirstVisit = true;
+                string username;
+                Request.Cookies.TryGetValue("AspNetCore.Application.Identity", out username);
+                if (username != null)
+                {
+                    MyUser userLogin = await _userRepository.FindUserByName(username);
+                    Login login = new Login()
+                    {
+                        Password = userLogin.PasswordHash,
+                        Username = username
+
+                    };
+
+                    RedirectToAction("Login", "Account", login);//sign in user
+                }
+            }
+
             ViewBag.pageName = "HOME PAGE";
             if (TempData["LoginError"] != null) ViewBag.LoginError = TempData["LoginError"];
             return View("Index", _productRepository.AvailableItems());
@@ -78,23 +100,23 @@ namespace webStoreFinal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         //    suggestion:    [Authorize(Roles ="SignedInUser")]
-        public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[]pictures)
+        public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[] pictures)
         {
             ViewBag.pageName = "Add New Advertisement";
             if (ModelState.IsValid)
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
                 product.SellerId = userAuthenticated.Id;
-                if (pictures.Length <3)
+                if (pictures.Length < 3)
                 {
-                   await _productRepository.AddProduct(product, pictures);
+                    await _productRepository.AddProduct(product, pictures);
                     ViewBag.ItemAdded = "the item was published successfully";
                 }
                 else
                 {
                     ViewBag.PictureError = "please enter up to 3 pictures only";
                 }
-                
+
 
             }
             return View();
