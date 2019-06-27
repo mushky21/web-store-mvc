@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace webStoreFinal.ViewComponents.LoginViewComponent
+namespace webStoreFinal.Services
 {
-    public class Login : ViewComponent
+    public interface IGreetingService
     {
-        public async Task<IViewComponentResult> InvokeAsync()
+        string GreetingContent();
+    }
+
+    public class GreetingService:IGreetingService
+    {
+        public string GreetingContent()
         {
             string greeting;
             if (DateTime.Now.Hour > 6 && DateTime.Now.Hour < 12)
@@ -23,10 +27,8 @@ namespace webStoreFinal.ViewComponents.LoginViewComponent
             {
                 greeting = "Good Evening";
             }
-
-            ViewBag.greeting = greeting;
-            return await Task.FromResult<IViewComponentResult>(View("Greeting"));
+            return greeting;
         }
     }
-}
 
+}
