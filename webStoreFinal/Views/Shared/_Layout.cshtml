@@ -26,6 +26,7 @@
         @if (IsSectionDefined("login"))
         {
             RenderSection("Login");
+            <button  asp-action="LogOut" asp-controller="Account">Log Out</button>
         }
 
     </div>

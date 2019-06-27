@@ -13,6 +13,7 @@ namespace webStoreFinal.Controllers
     public class RegisterController : Controller
     {
         private IUserRepository _userRepository;
+
         public RegisterController(IUserRepository userRepository)
         {
             _userRepository = userRepository;

@@ -5,10 +5,7 @@ using System.Threading.Tasks;
 
 namespace webStoreFinal.Services
 {
-    public interface IGreetingService
-    {
-        string GreetingContent();
-    }
+
 
     public class GreetingService:IGreetingService
     {

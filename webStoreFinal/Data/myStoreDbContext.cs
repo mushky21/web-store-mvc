@@ -24,6 +24,10 @@ namespace webStoreFinal.Data
 
     //    protected override void OnModelCreating(ModelBuilder builder)
     //    {
+    // a way i found online to handle the pk exception(did not check it yet):
+    //base.OnModelCreating(builder);
+
+
     //        //defining new products
     //        //builder.Entity<Product>().HasData(
     //        //    new Product {ProductKey=1, Title="Fridge", Price=1000, ProductState=State.Available, ShortDescription="25 liter second hand fridge",
