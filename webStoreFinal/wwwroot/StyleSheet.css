@@ -5,9 +5,15 @@
 
 .content {
     display: inline-block;
+    align-content:initial
 }
 
 .title {
     display: inline-block;
 }
+/*form the  red asterix (class located in register page)*/
+.form-group.required .control-label:after{
+    content:"*";
+    color: red;
 
+}

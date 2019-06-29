@@ -39,6 +39,12 @@ namespace webStoreFinal.Controllers
             return View("UpdatingDetails",userAuthenicated);
         }
 
+        public IActionResult Register()
+        {
+            ViewBag.pageName = "Registration Page";
+            return View();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(Register registerData)
         {

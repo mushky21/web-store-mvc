@@ -17,12 +17,14 @@
             @await Html.PartialAsync("_LoginPartialView", new Login())
         }
     </div>
-    <p>
-        Purchase process completed successfully.
-        You are welcome to purchase additional products and enjoy a perfect shopping experience!
-    </p>
-    <a asp-action="AvailableItems" asp-controller="Home">
-        return to home
-    </a>
+    <div class="content">
+        <p>
+            Purchase process completed successfully.
+            You are welcome to purchase additional products and enjoy a perfect shopping experience!
+        </p>
+        <a asp-action="AvailableItems" asp-controller="Home">
+            return to home
+        </a>
+    </div>
 </body>
 </html>

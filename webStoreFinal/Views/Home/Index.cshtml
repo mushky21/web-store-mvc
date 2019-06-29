@@ -8,7 +8,7 @@
 <p>
 
     @section Title{
-        @await Html.PartialAsync("_TitlePartialView");
+        @await Html.PartialAsync("_TitlePartialView")
     }
     <div>
 
@@ -16,18 +16,19 @@
             @await Html.PartialAsync("_LoginPartialView", new Login())
         }
     </div>
-    <div class="text-danger border-danger">
-        your messages here:
-    </div>
-    <div class="ErrorMessages">
-        @ViewBag.ErrorMessage
-        <div>@ViewBag.LoginError</div>
-    </div>
+    <div class="content">
+        <div class="text-danger border-danger">
+            your messages here:
+        </div>
+        <div class="ErrorMessages">
+            @ViewBag.ErrorMessage
+            <div>@ViewBag.LoginError</div>
+        </div>
 
-    <div class="buttons">
-        <a asp-controller="Home" asp-action="OrderByDate">order by date</a>
-        <a asp-controller="Home" asp-action="OrderByTitle">order by Title</a>
-    </div>
+        <div class="buttons">
+            <a asp-controller="Home" asp-action="OrderByDate">order by date</a>
+            <a asp-controller="Home" asp-action="OrderByTitle">order by Title</a>
+        </div>
 
 </p>
 <div>
@@ -37,4 +38,5 @@
             @await Html.PartialAsync("_AdvertisePartialView", item)
         </div>
     }
+</div>
 </div>

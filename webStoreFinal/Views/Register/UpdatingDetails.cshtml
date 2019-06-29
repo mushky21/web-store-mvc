@@ -10,7 +10,7 @@
 </head>
 <body>
     @section Title{
-        @await Html.PartialAsync("_TitlePartialView");
+        @await Html.PartialAsync("_TitlePartialView")
     }
     <div>
 
@@ -20,52 +20,54 @@
             }
         </div>
         @*missing:need to check how to display red asterik instead of error massege,for each field*@
-        <form asp-action="UpdatingDetails" asp-controller="Register" method="put">
-            <div>
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" />
-                <span asp-validation-for="FirstName"></span>
-            </div>
-            <div>
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" />
-                <span asp-validation-for="LastName"></span>
-            </div>
-            <div>
-                <label asp-for="Username"></label>
-                <input disabled asp-for="Username" />
-            </div>
-            <div>
-                <label asp-for="BirthDate"></label>
-                <input asp-for="BirthDate" />
-                <span asp-validation-for="BirthDate"></span>
-            </div>
-            <div>
-                <label asp-for="Email"></label>
-                <input asp-for="Email" />
-                <span asp-validation-for="Email"></span>
-            </div>
-            <div>
-                <label asp-for="CurrentPassword"></label>
-                <input asp-for="CurrentPassword" />
-                <span asp-validation-for="CurrentPassword"></span>
-            </div>
-            <div>
-                <label asp-for="Password"></label>
-                <input asp-for="Password" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div>
-                <label asp-for="PasswordConfirm"></label>
-                <input asp-for="PasswordConfirm" />
-                <span asp-validation-for="PasswordConfirm"></span>
-            </div>
+        <div class="content">
+            <form asp-action="UpdatingDetails" asp-controller="Register" method="put">
+                <div>
+                    <label asp-for="FirstName"></label>
+                    <input asp-for="FirstName" />
+                    <span asp-validation-for="FirstName"></span>
+                </div>
+                <div>
+                    <label asp-for="LastName"></label>
+                    <input asp-for="LastName" />
+                    <span asp-validation-for="LastName"></span>
+                </div>
+                <div>
+                    <label asp-for="Username"></label>
+                    <input disabled asp-for="Username" />
+                </div>
+                <div>
+                    <label asp-for="BirthDate"></label>
+                    <input asp-for="BirthDate" />
+                    <span asp-validation-for="BirthDate"></span>
+                </div>
+                <div>
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+                <div>
+                    <label asp-for="CurrentPassword"></label>
+                    <input asp-for="CurrentPassword" />
+                    <span asp-validation-for="CurrentPassword"></span>
+                </div>
+                <div>
+                    <label asp-for="Password"></label>
+                    <input asp-for="Password" />
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div>
+                    <label asp-for="PasswordConfirm"></label>
+                    <input asp-for="PasswordConfirm" />
+                    <span asp-validation-for="PasswordConfirm"></span>
+                </div>
 
-            <input type="submit" value="Update" />
-            <div asp-validation-summary="All">
+                <input type="submit" value="Update" />
+                <div asp-validation-summary="All">
 
 
-            </div>
-        </form>
+                </div>
+            </form>
+        </div>
 </body>
 </html>

@@ -5,16 +5,16 @@
 <h2>Additional Details</h2>
 
 @section Title{
-    @await Html.PartialAsync("_TitlePartialView");
+    @await Html.PartialAsync("_TitlePartialView")
 }
 <div>
 
     @section Login{
-        @await Html.PartialAsync("_LoginPartialView", new Login());
+        @await Html.PartialAsync("_LoginPartialView", new Login())
     }
 </div>
 
-<div class="moreDetails">
+<div class="content">
     <div class="itemDetails">
         <div>@Model.Title</div>
         <div>@Model.ShortDescription</div>
