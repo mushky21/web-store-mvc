@@ -5,15 +5,22 @@
 
 .content {
     display: inline-block;
-    align-content:initial
+
+}
+.invalid-tooltip {
+    content: '*';
+    color: red;
 }
 
 .title {
     display: inline-block;
 }
-/*form the  red asterix (class located in register page)*/
-.form-group.required .control-label:after{
-    content:"*";
-    color: red;
-
+.btn-sm{
+    margin-right:5px;
 }
+
+    /*form the  red asterix (class located in register page)*/
+    .form-group.required .control-label:after {
+        content: "*";
+        color: red;
+    }

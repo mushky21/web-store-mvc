@@ -21,13 +21,15 @@
     </div>
     @*missing:need to check how to display red asterik instead of error massege,for each field*@
     <div class="content">
-        <form asp-action="Register" asp-controller="Register" method="post">
-            <div class="form-group required">
+        <form  asp-action="Register" asp-controller="Register" method="post">
+            <div>
                 <div>
                     <label asp-for="FirstName"></label>
-                    <input asp-for="FirstName" />
-                  
+                    <input asp-for="FirstName" />@* class="form-control"**@
+                    @*<div class="invalid-tooltip"></div>*@
+
                 </div>
+
                 <div>
                     <label asp-for="LastName"></label>
                     <input asp-for="LastName" />
