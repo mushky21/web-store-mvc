@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -118,11 +119,15 @@ namespace webStoreFinal.Services
 
         }
 
+
+
         public List<Product> AvailableItems()
         {
             var availableItems = from product in Products()
                                  where product.ProductState == State.Available
                                  select product;
+
+
             return availableItems.ToList();
         }
 

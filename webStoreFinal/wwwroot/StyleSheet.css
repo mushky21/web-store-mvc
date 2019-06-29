@@ -18,9 +18,12 @@
 .btn-sm{
     margin-right:5px;
 }
-
-    /*form the  red asterix (class located in register page)*/
-    .form-group.required .control-label:after {
-        content: "*";
-        color: red;
-    }
+.defaultImage {
+    height:200px;
+    width:200px;
+}
+/*form the  red asterix (class located in register page)*/
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+}

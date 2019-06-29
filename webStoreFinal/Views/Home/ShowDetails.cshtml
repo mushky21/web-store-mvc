@@ -2,6 +2,7 @@
     ViewData["Title"] = "ShowDetails";
 }
 @model Product
+@inject IReadImage ReadImage
 <h2>Additional Details</h2>
 
 @section Title{
@@ -26,7 +27,28 @@
         <div>@Model.Price</div>
         <div>@Model.LongDescription</div>
     </div>
-
+    <div>
+        @if (Model.Photo1 == null)
+        {
+            <img src="~/DefaultImage.png" class="defaultImage" />
+        }
+        else
+        {
+            <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
+        }
+    </div>
+    <div>
+        @if (Model.Photo2 != null)
+        {
+            <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
+        }
+    </div>
+    <div>
+        @if (Model.Photo3 != null)
+        {
+            <img src="@ReadImage.ByteToImage(Model.Photo3)" class="img-thumbnail" />
+        }
+    </div>
     <div class="sellerDetails">
         <div>
             @Model.Seller.FirstName

@@ -1,4 +1,5 @@
 ﻿@model List<webStoreFinal.Models.Product>
+@inject webStoreFinal.Services.ReadImage ReadImage
 @{
     ViewData["Title"] = "Index";
 }
@@ -34,6 +35,8 @@
 <div>
     @foreach (var item in Model)
     {
+        
+
         <div>
             @await Html.PartialAsync("_AdvertisePartialView", item)
         </div>

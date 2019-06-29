@@ -97,14 +97,14 @@ namespace webStoreFinal.Controllers
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
                 product.SellerId = userAuthenticated.Id;
-                if (pictures.Length < 3)
+                if (pictures.Length > 3)
+                {
+                    ViewBag.PictureError = "please enter up to 3 pictures only";
+                }
+                else if (pictures.Length < 3)
                 {
                     await _productRepository.AddProduct(product, pictures);
                     ViewBag.ItemAdded = "the item was published successfully";
-                }
-                else
-                {
-                    ViewBag.PictureError = "please enter up to 3 pictures only";
                 }
 
 

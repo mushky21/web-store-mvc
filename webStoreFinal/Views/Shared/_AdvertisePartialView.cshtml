@@ -1,4 +1,5 @@
 ﻿@model Product
+@inject IReadImage ReadImage
 
 
 <head>
@@ -16,12 +17,17 @@
     <div>
         @Model.ShortDescription
     </div>
-    @*<div>
-            @Model.Photo1
-        </div>*@
+    <div>
+        @if(Model.Photo1==null)
+        {
+            <img src="~/DefaultImage.png" class="defaultImage" />
+        }
+        else
+        {
+            <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail"/>
+        }
 
-    @*<@Html.ActionLink("Add to cart", "AddToCart", "ShoppingCart", new { id= Model.ProductKey, state=Model.ProductState})/>
-        <@Html.ActionLink("Show ", "AddToCart", "ShoppingCart", new { id= Model.ProductKey, state=Model.ProductState})/>*@
+    </div>
 
     <a asp-action="AddToCart" asp-controller="Home" asp-route-id=@Model.ProductKey asp-route-state=@Model.ProductState>
         <input type="button" value="Add To Cart" />
