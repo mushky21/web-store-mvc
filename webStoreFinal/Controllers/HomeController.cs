@@ -41,7 +41,7 @@ namespace webStoreFinal.Controllers
         //}
 
         [AllowAnonymous]
-        public async Task<IActionResult> AvailableItems()
+        public IActionResult AvailableItems()
         {
             ////try sign in user, if his username is exist in cookies
             ////only, at the first time, user enter to this page, for each browsing

@@ -30,8 +30,8 @@ namespace webStoreFinal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IReadImage, ReadImage>();
 
-            
             services.AddDbContext<myStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<MyUser, IdentityRole>()
            .AddEntityFrameworkStores<myStoreDbContext>();
