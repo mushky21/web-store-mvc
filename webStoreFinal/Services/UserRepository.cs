@@ -51,7 +51,7 @@ namespace webStoreFinal.Services
             return user;
         }
 
-        public async Task<MyUser> FindUserById(int userId)
+        public async Task<MyUser> FindUserById(string userId)
         {
             return await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
         }

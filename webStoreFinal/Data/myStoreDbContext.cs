@@ -9,9 +9,9 @@ using webStoreFinal.Models;
 
 namespace webStoreFinal.Data
 {
-    public class myStoreDbContext : IdentityDbContext<MyUser,IdentityRole<int>,int>
+    public class myStoreDbContext : IdentityDbContext<MyUser>
     {
-        public myStoreDbContext(DbContextOptions options) : base(options)
+        public myStoreDbContext(DbContextOptions<myStoreDbContext> options) : base(options)
         {
 
         }

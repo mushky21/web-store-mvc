@@ -39,7 +39,7 @@ namespace webStoreFinal.Controllers
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
-            Response.Cookies.Delete("AspNetCore.Application.Identity");//check!!
+            Response.Cookies.Delete("AspNetCore.Identity.Application");//check!!
             return RedirectToAction("AvailableItems");
         }
     }

@@ -18,10 +18,10 @@ namespace webStoreFinal.Models
         }
         public DateTime PublishedDate { get { return _publishedDate; } }
         public virtual MyUser Seller { get; set; }
-        public int? SellerId { get; set; }
+        public string SellerId { get; set; }
 
         public virtual MyUser Buyer { get; set; }
-        public int? BuyerId { get; set; } //{ get { return Buyer.UserId; } }
+        public string BuyerId { get; set; } //{ get { return Buyer.UserId; } }
 
         [Required]
         [StringLength(10)]

@@ -19,7 +19,7 @@ namespace webStoreFinal.Controllers
         private IUserRepository _userRepository;
         private SignInManager<MyUser> _signInManager;
 
-        private static bool isFirstVisit = true;//check if it is first visit in this page, for this browsing
+      /*  private static bool isFirstVisit = true;*///check if it is first visit in this page, for this browsing
 
 
         public HomeController(IProductRepository productRepository, IUserRepository userRepository, SignInManager<MyUser> signInManager)
@@ -28,27 +28,6 @@ namespace webStoreFinal.Controllers
             _userRepository = userRepository;
             _signInManager = signInManager;
         }
-
-        //[AllowAnonymous]
-        //public async Task<IActionResult> TrySignIN()
-        //{
-        //    Register register = new Register()
-        //    {
-        //        Username = "mushky21",
-        //        Password = "9Mn@mu"
-        //    };
-        //    var result = await _userRepository.AddUser(register);
-        //    if (result.Succeeded)
-        //    {
-        //        MyUser user = await _userRepository.FindUserByName(register.Username);
-        //        await _signInManager.SignInAsync(user, true, null);
-        //        bool user2 = User.Identity.IsAuthenticated;
-
-        //    }
-        //    return View("Index");
-        //}
-
-
 
         //public IActionResult Index(string key) //shows the items according to the wanted order by method.
         //{
@@ -64,16 +43,16 @@ namespace webStoreFinal.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> AvailableItems()
         {
-            //try sign in user, if his username is exist in cookies
-            //only, at the first time, user enter to this page, for each browsing
-            if (isFirstVisit)
-            {
-                isFirstVisit = true;
+            ////try sign in user, if his username is exist in cookies
+            ////only, at the first time, user enter to this page, for each browsing
+            //if (isFirstVisit)
+            //{
+            //    isFirstVisit = true;
 
-                Login userLogin = await _userRepository.RecognizeUser();
-                if (userLogin != null)
-                    RedirectToAction("Login", "Account", userLogin);//sign in user
-            }
+            //    Login userLogin = await _userRepository.RecognizeUser();
+            //    if (userLogin != null)
+            //        RedirectToAction("Login", "Account", userLogin);//sign in user
+            //}
 
             ViewBag.pageName = "HOME PAGE";
             if (TempData["LoginError"] != null) ViewBag.LoginError = TempData["LoginError"];

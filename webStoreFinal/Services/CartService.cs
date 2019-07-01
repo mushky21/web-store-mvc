@@ -101,7 +101,7 @@ namespace webStoreFinal.Services
         }
 
         //update status of purchased and buyer id for each product in cart
-        private void CompletePurchaseForMember(int buyerId, HashSet<int> cartProductsId)
+        private void CompletePurchaseForMember(string buyerId, HashSet<int> cartProductsId)
         {
             foreach (var productId in cartProductsId)
             {

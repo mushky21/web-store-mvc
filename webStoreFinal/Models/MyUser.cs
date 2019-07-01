@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace webStoreFinal.Models
 {
-    public class MyUser: IdentityUser<int>
+    public class MyUser: IdentityUser
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

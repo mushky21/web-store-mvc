@@ -33,7 +33,7 @@ namespace webStoreFinal
 
             
             services.AddDbContext<myStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<MyUser, IdentityRole<int>>()
+            services.AddIdentity<MyUser, IdentityRole>()
            .AddEntityFrameworkStores<myStoreDbContext>();
 
             services.AddMvc();
@@ -48,9 +48,9 @@ namespace webStoreFinal
             }
             //myStoreDb.Database.EnsureCreated();
             app.UseStaticFiles();
-          //  app.UseIdentity();
+            app.UseCookiePolicy();
             app.UseAuthentication();
-           // app.UseMvcWithDefaultRoute();
+
 
             app.UseMvc(routes =>
             {

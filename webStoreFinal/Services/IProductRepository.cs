@@ -13,7 +13,7 @@ namespace webStoreFinal.Services
         Product FindProduct(int productId);
         Task<bool> AddProduct(Product newProduct, IFormFile [] pictures);
         bool RemoveProduct(int productId);
-        bool UpdateProductBuyer(int productId, int buyerId);
+        bool UpdateProductBuyer(int productId, string buyerId);
         bool UpdateProductState(int id,State state);
         List<Product> OrderByTitle();
         List<Product> OrderByDate();
