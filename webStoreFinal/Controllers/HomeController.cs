@@ -17,14 +17,39 @@ namespace webStoreFinal.Controllers
     {
         private IProductRepository _productRepository;
         private IUserRepository _userRepository;
+        private SignInManager<MyUser> _signInManager;
         private static bool isFirstVisit = true;//check if it is first visit in this page, for this browsing
 
 
-        public HomeController(IProductRepository productRepository, IUserRepository userRepository)
+        public HomeController(IProductRepository productRepository, IUserRepository userRepository, SignInManager<MyUser> signInManager)
         {
             _productRepository = productRepository;
             _userRepository = userRepository;
+            _signInManager = signInManager;
         }
+        public async Task<IActionResult> TrySignIN()
+        {
+            Register register = new Register()
+            {
+                Username = "mushky",
+                Password = "9Mn@mu"
+            };
+            var result = await _userRepository.AddUser(register);
+            if (result.Succeeded)
+            {
+                MyUser user = await _userRepository.FindUserByName(register.Username);
+                var resultSign = await _signInManager.PasswordSignInAsync(user, user.PasswordHash, true, false);
+                if (resultSign.Succeeded)
+                {
+                    if(User.Identity.IsAuthenticated)
+                    {
+
+                    }
+                }
+            }
+            return View("Index");
+        }
+
 
 
         //public IActionResult Index(string key) //shows the items according to the wanted order by method.
