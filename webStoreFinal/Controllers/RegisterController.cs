@@ -24,7 +24,7 @@ namespace webStoreFinal.Controllers
         public async Task<IActionResult> Index()
         {
             if (!User.Identity.IsAuthenticated) return View("Register");
-            MyUser userAuthenicated =await _userRepository.FindUserAuthenticated();
+            MyUser userAuthenicated = await _userRepository.FindUserAuthenticated();
 
             Update currentUserData = new Update
             {

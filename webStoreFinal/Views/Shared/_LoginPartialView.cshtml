@@ -1,6 +1,6 @@
 ﻿@model Login
 @inject IUserRepository UserRepository
-@inject IGreetingService greetingService
+
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -36,7 +36,7 @@
         var userAuthenticated = await UserRepository.FindUserAuthenticated();
 
         <div class="alert-heading border-danger">
-            @greetingService.GreetingContent()
+            @Html.TimeMessage();
             @userAuthenticated.FirstName  @userAuthenticated.LastName
         </div>
 

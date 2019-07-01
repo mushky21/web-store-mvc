@@ -18,6 +18,7 @@ namespace webStoreFinal.Controllers
         private IProductRepository _productRepository;
         private IUserRepository _userRepository;
         private SignInManager<MyUser> _signInManager;
+
         private static bool isFirstVisit = true;//check if it is first visit in this page, for this browsing
 
 
@@ -27,28 +28,25 @@ namespace webStoreFinal.Controllers
             _userRepository = userRepository;
             _signInManager = signInManager;
         }
-        public async Task<IActionResult> TrySignIN()
-        {
-            Register register = new Register()
-            {
-                Username = "mushky",
-                Password = "9Mn@mu"
-            };
-            var result = await _userRepository.AddUser(register);
-            if (result.Succeeded)
-            {
-                MyUser user = await _userRepository.FindUserByName(register.Username);
-                var resultSign = await _signInManager.PasswordSignInAsync(user, user.PasswordHash, true, false);
-                if (resultSign.Succeeded)
-                {
-                    if(User.Identity.IsAuthenticated)
-                    {
 
-                    }
-                }
-            }
-            return View("Index");
-        }
+        //[AllowAnonymous]
+        //public async Task<IActionResult> TrySignIN()
+        //{
+        //    Register register = new Register()
+        //    {
+        //        Username = "mushky21",
+        //        Password = "9Mn@mu"
+        //    };
+        //    var result = await _userRepository.AddUser(register);
+        //    if (result.Succeeded)
+        //    {
+        //        MyUser user = await _userRepository.FindUserByName(register.Username);
+        //        await _signInManager.SignInAsync(user, true, null);
+        //        bool user2 = User.Identity.IsAuthenticated;
+
+        //    }
+        //    return View("Index");
+        //}
 
 
 

@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace webStoreFinal.Services
+namespace webStoreFinal.Models
 {
-
-
-    public class GreetingService:IGreetingService
+    public static class TimeMessageTagHelper
     {
-        public string GreetingContent()
+        public static string TimeMessage(this IHtmlHelper htmlHelper)
         {
+            int hour = DateTime.Now.Hour;
             string greeting;
-            if (DateTime.Now.Hour > 6 && DateTime.Now.Hour < 12)
+            if (hour > 6 && hour < 12)
             {
                 greeting = "Good Morning";
             }
-            else if (DateTime.Now.Hour > 12 && DateTime.Now.Hour < 18)
+            else if (hour > 12 && hour < 18)
             {
                 greeting = "good Afternoon";
             }
@@ -27,5 +27,4 @@ namespace webStoreFinal.Services
             return greeting;
         }
     }
-
 }

@@ -30,7 +30,6 @@ namespace webStoreFinal
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICartService, CartService>();
-            services.AddSingleton<IGreetingService, GreetingService>();
 
             
             services.AddDbContext<myStoreDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -49,6 +48,7 @@ namespace webStoreFinal
             }
             //myStoreDb.Database.EnsureCreated();
             app.UseStaticFiles();
+          //  app.UseIdentity();
             app.UseAuthentication();
            // app.UseMvcWithDefaultRoute();
 
@@ -56,7 +56,7 @@ namespace webStoreFinal
             {
                 routes.MapRoute(
                     name: "Default",
-                    template: "{controller=Home}/{action=TrySignIN}"
+                    template: "{controller=Home}/{action=AvailableItems}"
                 );
 
             });

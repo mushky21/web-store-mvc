@@ -38,13 +38,17 @@ namespace webStoreFinal.Services
 
         public async Task<MyUser> FindUserAuthenticated()
         {
-            var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
-            if (userId != null)//more safe
-            {
-                return await _userManager.FindByIdAsync(userId);
+            //var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+            //if (userId != null)//more safe
+            //{
+            //    return await _userManager.FindByIdAsync(userId);
 
-            }
-            return null;
+            //}
+            //var user = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
+            ////var user= await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            //var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var user = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name);
+            return user;
         }
 
         public async Task<MyUser> FindUserById(int userId)
@@ -54,7 +58,7 @@ namespace webStoreFinal.Services
 
         public async Task<MyUser> FindUserByName(string username)
         {
-           return await _userManager.FindByNameAsync(username);
+            return await _userManager.FindByNameAsync(username);
         }
 
         public async Task<Login> RecognizeUser()

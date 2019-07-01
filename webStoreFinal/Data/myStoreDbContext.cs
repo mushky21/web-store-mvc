@@ -11,7 +11,7 @@ namespace webStoreFinal.Data
 {
     public class myStoreDbContext : IdentityDbContext<MyUser,IdentityRole<int>,int>
     {
-        public myStoreDbContext(DbContextOptions<myStoreDbContext> options) : base(options)
+        public myStoreDbContext(DbContextOptions options) : base(options)
         {
 
         }
