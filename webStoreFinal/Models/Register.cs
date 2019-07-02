@@ -27,9 +27,11 @@ namespace webStoreFinal.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        [DataType(DataType.Date),DisplayFormat(DataFormatString ="{0:dd:MM:yyy}",ApplyFormatInEditMode =true)]
         public DateTime BirthDate { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
+        [RegularExpression(".+\\@.+\\..+",ErrorMessage ="please type valid email")]
         public string Email { get; set; }
     }
 }
