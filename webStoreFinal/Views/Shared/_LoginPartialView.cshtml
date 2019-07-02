@@ -8,28 +8,28 @@
     @await Html.PartialAsync("_TitlePartialView")
 }
 
-<div >
+<div>
     @if (!User.Identity.IsAuthenticated)
     {
-    <form asp-action="Login" asp-controller="Account" method="post">
-        <div>
-            <label asp-for="Username"></label>
-            <input asp-for="Username" />
-            
-        </div>
-        <div>
-            <label asp-for="Password"></label>
-            <input asp-for="Password" />
-        </div>
-        <div class="btn-group">
-            <button type="submit" class="btn btn-primary btn-sm">Login</button>
-            <button type="button" class="btn btn-danger btn-sm" asp-action="LogOut" asp-controller="Account">Log Out</button>
+        <form asp-action="Login" asp-controller="Account" method="post">
+            <div>
+                <label asp-for="Username"></label>
+                <input asp-for="Username" />
 
-        </div>
+            </div>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password" />
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary btn-sm">Login</button>
+                <button type="button" class="btn btn-danger btn-sm" asp-action="LogOut" asp-controller="Account">Log Out</button>
 
-   
+            </div>
 
-    </form>
+
+
+        </form>
     }
     else
     {
@@ -39,6 +39,7 @@
             @Html.TimeMessage();
             @userAuthenticated.FirstName  @userAuthenticated.LastName
         </div>
+        <button type="button" class="btn btn-danger btn-sm" asp-action="LogOut" asp-controller="Account">Log Out</button>
 
     }
 </div>

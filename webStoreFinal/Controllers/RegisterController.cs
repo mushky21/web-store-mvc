@@ -23,20 +23,20 @@ namespace webStoreFinal.Controllers
         //else navigated to view of updating details
         public async Task<IActionResult> Index()
         {
-            if (!User.Identity.IsAuthenticated) return View("Register");
-            MyUser userAuthenicated = await _userRepository.FindUserAuthenticated();
+            if (!User.Identity.IsAuthenticated){ return  RedirectToAction("Register"); }
 
-            Update currentUserData = new Update
-            {
-                BirthDate= userAuthenicated.BirthDate,
-                CurrentPassword=userAuthenicated.PasswordHash,
-                Email=userAuthenicated.Email,
-                FirstName=userAuthenicated.FirstName,
-                LastName=userAuthenicated.LastName,
-                Username=userAuthenicated.UserName         
-            };
+                MyUser userAuthenicated = await _userRepository.FindUserAuthenticated();
+                Update currentUserData = new Update
+                {
+                    BirthDate = userAuthenicated.BirthDate,
+                    CurrentPassword = userAuthenicated.PasswordHash,
+                    Email = userAuthenicated.Email,
+                    FirstName = userAuthenicated.FirstName,
+                    LastName = userAuthenicated.LastName,
+                    Username = userAuthenicated.UserName
+                };
 
-            return View("UpdatingDetails",userAuthenicated);
+            return View("Update", currentUserData);
         }
 
         public IActionResult Register()
