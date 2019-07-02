@@ -16,7 +16,7 @@ namespace webStoreFinal.Validations
             if (value == null) return new ValidationResult("");
             var userManager = (UserManager<MyUser>)validationContext.GetService(typeof(UserManager<MyUser>));
             string userName = value.ToString();
-            var user = userManager.FindByNameAsync(userName).Result;
+            var user = userManager.Users.FirstOrDefault(u=>u.UserName==userName);
             // var user = userManager.Users.FirstOrDefault((u) => u.UserName == userName);
             if (user != null)
             {
