@@ -35,7 +35,7 @@ namespace webStoreFinal.Controllers
                     LastName = userAuthenicated.LastName,
                     Username = userAuthenicated.UserName
                 };
-
+            ViewBag.pageName = "Updating Page";
             return View("Update", currentUserData);
         }
 
