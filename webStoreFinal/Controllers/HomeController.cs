@@ -97,7 +97,7 @@ namespace webStoreFinal.Controllers
             ViewBag.pageName = "Add New Advertisement";
             if (ModelState.IsValid)
             {
-                MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
+                MyUser userAuthenticated = await _userRepository.FindUserAuthAsync();
                 product.SellerId = userAuthenticated.Id;
                 if (pictures.Length > 3)
                 {

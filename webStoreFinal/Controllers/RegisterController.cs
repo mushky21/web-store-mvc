@@ -23,18 +23,17 @@ namespace webStoreFinal.Controllers
         //else navigated to view of updating details
         public async Task<IActionResult> Index()
         {
-            if (!User.Identity.IsAuthenticated){ return  RedirectToAction("Register"); }
+            if (!User.Identity.IsAuthenticated) { return RedirectToAction("Register"); }
 
-                MyUser userAuthenicated = await _userRepository.FindUserAuthenticated();
-                Update currentUserData = new Update
-                {
-                    BirthDate = userAuthenicated.BirthDate,
-                    CurrentPassword = userAuthenicated.PasswordHash,
-                    Email = userAuthenicated.Email,
-                    FirstName = userAuthenicated.FirstName,
-                    LastName = userAuthenicated.LastName,
-                    Username = userAuthenicated.UserName
-                };
+            MyUser userAuthenicated = await _userRepository.FindUserAuthAsync();
+            Update currentUserData = new Update
+            {
+                BirthDate = userAuthenicated.BirthDate,
+                Email = userAuthenicated.Email,
+                FirstName = userAuthenicated.FirstName,
+                LastName = userAuthenicated.LastName,
+                Username = userAuthenicated.UserName
+            };
             ViewBag.pageName = "Updating Page";
             return View("Update", currentUserData);
         }
@@ -47,11 +46,10 @@ namespace webStoreFinal.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register(Register registerData)
-        {
-            ViewBag.pageName = "Registration Page";
+        {          
             if (ModelState.IsValid)
             {
-                var result =await _userRepository.AddUser(registerData);
+                var result = await _userRepository.AddUser(registerData);
                 if (result.Succeeded)
                 {
                     return RedirectToAction("AvailableItems", "Home");
@@ -63,18 +61,22 @@ namespace webStoreFinal.Controllers
 
                 }
             }
+            ViewBag.pageName = "Registration Page";
             return View("Register");
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdatingDetails(Update updateData)
         {
-            var result = await _userRepository.UpdateUser(updateData);
-            if(result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("AvailableItems", "Home");
+                var result = await _userRepository.UpdateUser(updateData);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("AvailableItems", "Home");
+                }
             }
-            return View("UpdatingDetails", updateData);//need?         
+            return View("Update", updateData);         
         }
     }
 }

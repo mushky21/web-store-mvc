@@ -1,6 +1,5 @@
 ﻿@model Login
 @inject IUserRepository UserRepository
-
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
@@ -33,13 +32,15 @@
     }
     else
     {
-        var userAuthenticated = await UserRepository.FindUserAuthenticated();
+        var userAuthenticated = await UserRepository.FindUserAuthAsync();
 
         <div class="alert-heading border-danger">
             @Html.TimeMessage();
             @userAuthenticated.FirstName  @userAuthenticated.LastName
         </div>
-        <button type="button" class="btn btn-danger btn-sm" asp-action="LogOut" asp-controller="Account">Log Out</button>
+        <form asp-action="LogOut" asp-controller="Account">
+            <button class="btn btn-danger btn-sm" >Log Out</button>
+        </form>
 
     }
 </div>

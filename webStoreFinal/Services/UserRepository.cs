@@ -14,7 +14,7 @@ namespace webStoreFinal.Services
     public class UserRepository : IUserRepository
     {
         private UserManager<MyUser> _userManager;
-        private IHttpContextAccessor _httpContextAccessor;//this for FindUserAuthenticated,need http context
+        private IHttpContextAccessor _httpContextAccessor;//this for FindUserAuthAsync,need http context
 
         public UserRepository(UserManager<MyUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
@@ -36,7 +36,14 @@ namespace webStoreFinal.Services
             return result;
         }
 
-        public async Task<MyUser> FindUserAuthenticated()
+        public MyUser FindUserAuth()
+        {
+            var user = _userManager.Users.
+            FirstOrDefault(u => u.UserName == _httpContextAccessor.HttpContext.User.Identity.Name);
+            return user;
+        }
+
+        public async Task<MyUser> FindUserAuthAsync()
         {
             //var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
             //if (userId != null)//more safe

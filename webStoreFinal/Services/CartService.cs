@@ -88,7 +88,7 @@ namespace webStoreFinal.Services
         public async void CompletePurchase()
         {
             HashSet<int> cartProductsId = ProductsInCart();
-            MyUser userAuthenticated = await _userRepository.FindUserAuthenticated();
+            MyUser userAuthenticated = await _userRepository.FindUserAuthAsync();
             if (userAuthenticated != null)
                 CompletePurchaseForMember(userAuthenticated.Id, cartProductsId);
             else

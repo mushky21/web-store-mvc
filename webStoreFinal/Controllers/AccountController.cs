@@ -40,7 +40,7 @@ namespace webStoreFinal.Controllers
         {
             await _signInManager.SignOutAsync();
             Response.Cookies.Delete("AspNetCore.Identity.Application");//check!!
-            return RedirectToAction("AvailableItems");
+            return RedirectToAction("AvailableItems","Home");
         }
     }
 }
