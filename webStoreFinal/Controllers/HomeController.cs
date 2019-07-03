@@ -76,8 +76,11 @@ namespace webStoreFinal.Controllers
         [AllowAnonymous]
         public IActionResult ShowDetails(int id)
         {
+            var product = _productRepository.FindProduct(id);
             ViewBag.pageName = "More Details";
-            return View(_productRepository.FindProduct(id));
+            return View("ShowDetails", product);
+ 
+
         }
 
         //a method only authorized users can have access to

@@ -14,67 +14,79 @@
         @await Html.PartialAsync("_LoginPartialView", new Login())
     }
 </div>
+<div>
+    @if (Model == null)
+    {
+        @await Component.InvokeAsync("ErrorHandle");
+    }
+</div>
+<div>
 
-<div class="content">
-    <div class="itemDetails">
-        <div>@Model.Title</div>
-        <div>@Model.ShortDescription</div>
-        <div>@Model.PublishedDate</div>
-        <div>@Model.Photo1</div>
-        <div>@Model.Photo2</div>
-        <div>@Model.Photo3</div>
-        <div>@Model.LongDescription</div>
-        <div>@Model.Price</div>
-        <div>@Model.LongDescription</div>
-    </div>
-    <div>
-        @if (Model.Photo1 == null)
-        {
-            <img src="~/DefaultImage.png" class="defaultImage" />
-        }
-        else
-        {
-            <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
-        }
-    </div>
-    <div>
-        @if (Model.Photo2 != null)
-        {
-            <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
-        }
-    </div>
-    <div>
-        @if (Model.Photo3 != null)
-        {
-            <img src="@ReadImage.ByteToImage(Model.Photo3)" class="img-thumbnail" />
-        }
-    </div>
-    <div class="sellerDetails">
-        <div>
-            @Model.Seller.FirstName
+
+    <div class="content">
+        <div class="itemDetails">
+            <div>@Model.Title</div>
+            <div>@Model.ShortDescription</div>
+            <div>@Model.PublishedDate</div>
+            <div>@Model.Photo1</div>
+            <div>@Model.Photo2</div>
+            <div>@Model.Photo3</div>
+            <div>@Model.LongDescription</div>
+            <div>@Model.Price</div>
+            <div>@Model.LongDescription</div>
         </div>
         <div>
-            @Model.Seller.LastName
+            @if (Model.Photo1 == null)
+            {
+                <img src="~/DefaultImage.png" class="defaultImage" />
+            }
+            else
+            {
+                <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
+            }
         </div>
         <div>
-            @Model.Seller.BirthDate
+            @if (Model.Photo2 != null)
+            {
+                <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
+            }
         </div>
         <div>
-            @Model.Seller.Email
+            @if (Model.Photo3 != null)
+            {
+                <img src="@ReadImage.ByteToImage(Model.Photo3)" class="img-thumbnail" />
+            }
         </div>
+        <div class="sellerDetails">
+            <div>
+                @Model.Seller.FirstName
+            </div>
+            <div>
+                @Model.Seller.LastName
+            </div>
+            <div>
+                @Model.Seller.BirthDate
+            </div>
+            <div>
+                @Model.Seller.Email
+            </div>
+
+
+        </div>
+
+        <a asp-action="AddToCart" asp-controller="Home" asp-route-id=@Model.ProductKey asp-route-state=@Model.ProductState>
+            <input type="button" value="Add To Cart" />
+        </a>
+
+        <a asp-action="Home" asp-controller="AvailableItems">
+            <input type="button" value="Return" />
+        </a>
+
+
+
 
 
     </div>
-
-    <a asp-action="AddToCart" asp-controller="Home" asp-route-id=@Model.ProductKey asp-route-state=@Model.ProductState>
-        <input type="button" value="Add To Cart" />
-    </a>
-
-    <a asp-action="Home" asp-controller="AvailableItems">
-        <input type="button" value="Return" />
-    </a>
-
-
 
 
 
