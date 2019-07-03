@@ -28,7 +28,7 @@
 
                     </td>
                     <td>
-                        @item.Price
+                        @item.Price NIS
                     </td>
                     <td>
                         <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">Remove</a>
@@ -36,7 +36,7 @@
                 </tr>
             }
         </table>
-        <div class="cart-summary">
+        <div class="cart-summary border border-primary float-right">
             <div>
                 total price for visitor:
                 @TempData["visitorPrice"]
@@ -45,7 +45,7 @@
             <div>
                 total price for members:
                 @TempData["memberPrice"]
-                @*add member price*@
+                
             </div>
             <form asp-controller="ShoppingCart" asp-action="CompletePurchase" method="post">
                 <input type="submit" value="Purchase" />
