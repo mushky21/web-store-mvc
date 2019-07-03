@@ -1,6 +1,6 @@
 ﻿
 
-@model Update
+@model Register
 
 <!DOCTYPE html>
 
@@ -13,8 +13,6 @@
     @section Title{
         @await Html.PartialAsync("_TitlePartialView")
     }
-    <div>
-
         <div>
             @section Login{
                 @await Html.PartialAsync("_LoginPartialView", new Login())
@@ -22,7 +20,7 @@
         </div>
         @*missing:need to check how to display red asterik instead of error massege,for each field*@
         <div class="content">
-            <form asp-action="UpdatingDetails" asp-controller="Register" method="post">
+            <form asp-action="UpdatingDetails" asp-controller="Register" method="put">
                 <div>
                     <label asp-for="FirstName"></label>
                     <input asp-for="FirstName" />
@@ -44,30 +42,15 @@
                 </div>
                 <div>
                     <label asp-for="Email"></label>
-                    <input  asp-for="Email" />
+                    <input asp-for="Email" />
                     <span asp-validation-for="Email"></span>
                 </div>
-                <div>
-                    <label asp-for="CurrentPassword"></label>
-                    <input type="password" asp-for="CurrentPassword" />
-                    <span asp-validation-for="CurrentPassword"></span>
-                </div>
-                <div>
-                    <label asp-for="Password"></label>
-                    <input asp-for="Password" />
-                    <span asp-validation-for="Password"></span>
-                </div>
-                <div>
-                    <label asp-for="PasswordConfirm"></label>
-                    <input asp-for="PasswordConfirm" />
-                    <span asp-validation-for="PasswordConfirm"></span>
-                </div>
-
                 <input type="submit" value="Update" />
                 <div asp-validation-summary="All">
-
-
-                </div>
+            </div>
+            </form>
+            <form asp-action="UpdateNewPassword" asp-controller="Register">
+                <button class="btn btn-danger btn-sm">New password</button>
             </form>
         </div>
 </body>

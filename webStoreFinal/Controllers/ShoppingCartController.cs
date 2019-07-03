@@ -25,12 +25,18 @@ namespace webStoreFinal.Controllers
             ViewBag.pageName = "Current Cart Content";
             List<Product> currentCart = _cartService.ShowCart();
 
-            double visitorPrice = _cartService.VisitorCartSum(currentCart);
-            double memberPrice = _cartService.MemberCartSum(currentCart);
+            if(currentCart.Count==0)
+            {
+                ViewBag.emptyMsg = "You havn't any product in your shopping cart...for what are you waiting?";
+            }
+            else
+            {
+                double visitorPrice = _cartService.VisitorCartSum(currentCart);
+                double memberPrice = _cartService.MemberCartSum(currentCart);
 
-            TempData["visitorPrice"] = visitorPrice;
-            TempData["memberPrice"] = memberPrice;
-
+                TempData["visitorPrice"] = visitorPrice;
+                TempData["memberPrice"] = memberPrice;
+            }
             return View(currentCart);
         }
 

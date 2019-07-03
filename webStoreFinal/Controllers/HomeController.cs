@@ -12,7 +12,6 @@ using webStoreFinal.Services;
 
 namespace webStoreFinal.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private IProductRepository _productRepository;
@@ -40,7 +39,6 @@ namespace webStoreFinal.Controllers
         //    return View(myProductsList);
         //}
 
-        [AllowAnonymous]
         public IActionResult AvailableItems()
         {
             ////try sign in user, if his username is exist in cookies
@@ -59,21 +57,18 @@ namespace webStoreFinal.Controllers
             return View("Index", _productRepository.AvailableItems());
         }
 
-        [AllowAnonymous]
         public IActionResult OrderByDate()
         {
             ViewBag.pageName = "HOME PAGE";
             return View("Index", _productRepository.OrderByDate());
         }
 
-        [AllowAnonymous]
         public IActionResult OrderByTitle()
         {
             ViewBag.pageName = "HOME PAGE";
             return View("Index", _productRepository.OrderByTitle());
         }
 
-        [AllowAnonymous]
         public IActionResult ShowDetails(int id)
         {
             ViewBag.pageName = "More Details";
@@ -82,6 +77,7 @@ namespace webStoreFinal.Controllers
 
         //a method only authorized users can have access to
         //   suggestion:     [Authorize(Roles ="SignedInUser")]
+        [Authorize]
         public IActionResult AddNewAdvertisement()
         {
             ViewBag.pageName = "Add New Advertisement";
@@ -91,7 +87,7 @@ namespace webStoreFinal.Controllers
         //a method only authorized users can have access to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //    suggestion:    [Authorize(Roles ="SignedInUser")]
+        [Authorize]
         public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[] pictures)
         {
             ViewBag.pageName = "Add New Advertisement";

@@ -11,6 +11,12 @@
     content: '*';
     color: red;
 }
+.form-group.required.control-label:after {
+    color:red;
+    content:"*";
+    position:absolute;
+    margin-left:-10px;
+}
 
 .title {
     display: inline-block;
