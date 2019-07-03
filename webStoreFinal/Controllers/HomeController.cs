@@ -85,12 +85,13 @@ namespace webStoreFinal.Controllers
 
         //a method only authorized users can have access to
         //   suggestion:     [Authorize(Roles ="SignedInUser")]
+        [Authorize]
         public IActionResult AddNewAdvertisement()
         {
             ViewBag.pageName = "Add New Advertisement";
             return View();//navigated to AddNewAdvertisement view
         }
-
+        [Authorize]
         //a method only authorized users can have access to
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,6 +103,7 @@ namespace webStoreFinal.Controllers
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthAsync();
                 product.SellerId = userAuthenticated.Id;
+                product.ProductState = State.Available;
                 if (pictures.Length > 3)
                 {
                     ViewBag.PictureError = "please enter up to 3 pictures only";

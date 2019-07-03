@@ -46,8 +46,16 @@
                         <a asp-action="Index" asp-controller="Register" class="nav-link">Register</a>
                     </li>
                     <li class="nav-item">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="AddNewAdvertisement" asp-controller="home" class="nav-link">Add New Advertisement</a>
+                        }
+
+                    </li>
+                    <li class="nav-item">
                         <a asp-action="Index" asp-controller="About" class="nav-link">About</a>
                     </li>
+
                 </ul>
             </nav>
         </div>
