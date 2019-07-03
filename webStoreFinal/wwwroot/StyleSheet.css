@@ -18,9 +18,14 @@
 .btn-sm{
     margin-right:5px;
 }
-.defaultImage {
-    height:200px;
-    width:200px;
+ .defaultImage {
+    height: 25px;
+    width: 25px;
+}
+
+.img-thumbnail {
+    height: 25px;
+    width: 25px;
 }
 /*form the  red asterix (class located in register page)*/
 .form-group.required .control-label:after {
