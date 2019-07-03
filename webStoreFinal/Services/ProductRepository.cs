@@ -90,9 +90,13 @@ namespace webStoreFinal.Services
         public bool UpdateProductState(int id,State state)
         {
             //search the wanted item in the repository and change it's status from available to in cart
+            int updated = default(int);
             var foundProduct = FindProduct(id);
-            foundProduct.ProductState =state;
-            int updated = _storeDbContext.SaveChanges();
+            if (foundProduct!=null)
+            {
+                foundProduct.ProductState = State.Available;
+                updated = _storeDbContext.SaveChanges();
+            }
             return updated > 0;
         }
 

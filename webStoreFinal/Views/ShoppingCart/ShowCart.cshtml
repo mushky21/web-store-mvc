@@ -1,4 +1,4 @@
-﻿
+﻿@model List<Product> 
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ShowCart</title>
@@ -24,16 +24,21 @@
             {
                 <tr>
                     <td>
-                        <a asp-action="ShowDetails" asp-controller="Home">@item.Title</a>
-
+                     <a asp-controller="home" asp-action="showDetails" asp-route-id="@item.ProductKey">   @item.Title</a>
                     </td>
+                    
                     <td>
                         @item.Price NIS
+
                     </td>
+
                     <td>
-                        <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">Remove</a>
+                        <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">
+                            remove from cart
+                        </a>
                     </td>
                 </tr>
+
             }
         </table>
         <div class="cart-summary border border-primary float-right">
@@ -45,7 +50,7 @@
             <div>
                 total price for members:
                 @TempData["memberPrice"]
-                
+
             </div>
             <form asp-controller="ShoppingCart" asp-action="CompletePurchase" method="post">
                 <input type="submit" value="Purchase" />

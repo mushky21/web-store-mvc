@@ -14,7 +14,11 @@ namespace webStoreFinal.Models
         private DateTime _publishedDate;
         public Product()
         {
-            _publishedDate = DateTime.Now;
+            if (_publishedDate == null)
+            {
+                _publishedDate = DateTime.Now;
+            }
+            
         }
         public DateTime PublishedDate { get { return _publishedDate; } }
         public virtual MyUser Seller { get; set; }
