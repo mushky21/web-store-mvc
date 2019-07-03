@@ -20,7 +20,7 @@ namespace webStoreFinal.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Re-type Password")]
-        [Compare(nameof(Password), ErrorMessage = "Please Type Again")]
+        [Compare(nameof(Password), ErrorMessage = "Passwords do not match,Please Type Again")]
         public string PasswordConfirm { get; set; }
         [Required]
         public string FirstName { get; set; }

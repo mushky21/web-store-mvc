@@ -14,12 +14,7 @@
         @await Html.PartialAsync("_LoginPartialView", new Login())
     }
 </div>
-<div>
-    @if (Model == null)
-    {
-        @await Component.InvokeAsync("ErrorHandle");
-    }
-</div>
+
 <div>
 
 

@@ -77,6 +77,10 @@ namespace webStoreFinal.Controllers
         public IActionResult ShowDetails(int id)
         {
             var product = _productRepository.FindProduct(id);
+            if (product==null)
+            {
+                return ViewComponent("ProductNotFound");
+            }
             ViewBag.pageName = "More Details";
             return View("ShowDetails", product);
  
