@@ -46,7 +46,7 @@ namespace webStoreFinal.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register(Register registerData)
-        {          
+        {
             if (ModelState.IsValid)
             {
                 var result = await _userRepository.AddUser(registerData);
@@ -76,7 +76,7 @@ namespace webStoreFinal.Controllers
                     return RedirectToAction("AvailableItems", "Home");
                 }
             }
-            return View("Update", updateData);         
+            return View("Update", updateData);
         }
     }
 }
