@@ -5,36 +5,48 @@
 <head>
 </head>
 <body>
-    <div>
-        @Model.Title
-    </div>
-    <div>
-        @Model.PublishedDate
-    </div>
-    <div>
-        @Model.Price
-    </div>
-    <div>
-        @Model.ShortDescription
-    </div>
-    <div>
-        @if(Model.Photo1==null)
-        {
-            <img src="~/DefaultImage.png" class="defaultImage" />
-        }
-        else
-        {
-            <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail"/>
-        }
+    <div class="border border-primary col-sm-3 col-lg-3 col-md-3">
+        <div class="thumbnail">
+            <h1 class="pull-right">@Model.Title </h1>
+            @if (Model.Photo1 == null)
+            {
+                <img src="~/DefaultImage.png" class="defaultImage" />
+            }
+            else
+            {
+                <img src="@ReadImage.ByteToImage(Model.Photo1)" class="img-thumbnail" />
+            }
 
+        </div>
+        <div class="caption">
+
+            <h1 class="pull-right"> @Model.Price shekel</h1>
+            <div class="pull-right">
+                @Model.ShortDescription
+            </div>
+            <div>
+                published date: @Model.PublishedDate
+            </div>
+            <div>
+                @if (Model.Seller != null)
+                {
+                    <div>seller:@Model.Seller</div>
+                }
+
+            </div>
+
+        </div>
+        <a asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id=@Model.ProductKey asp-route-state=@Model.ProductState>
+            <input type="button" value="Add To Cart" />
+        </a>
+        <a asp-action="ShowDetails" asp-controller="Home" asp-route-id="@Model.ProductKey">
+            <input type="button" value="Show Details" />
+        </a>
     </div>
 
-    <a asp-action="AddToCart" asp-controller="Home" asp-route-id=@Model.ProductKey asp-route-state=@Model.ProductState>
-        <input type="button" value="Add To Cart" />
-    </a>
-    <a asp-action="ShowDetails" asp-controller="Home" asp-route-id="@Model.ProductKey">
-        <input type="button" value="Show Details" />
-    </a>
+
+
+
 
 
 </body>

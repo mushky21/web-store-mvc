@@ -71,8 +71,15 @@ namespace webStoreFinal.Controllers
 
         public IActionResult ShowDetails(int id)
         {
+            var product = _productRepository.FindProduct(id);
+            if (product==null)
+            {
+                return ViewComponent("ProductNotFound");
+            }
             ViewBag.pageName = "More Details";
-            return View(_productRepository.FindProduct(id));
+            return View("ShowDetails", product);
+ 
+
         }
 
         //a method only authorized users can have access to
@@ -83,7 +90,7 @@ namespace webStoreFinal.Controllers
             ViewBag.pageName = "Add New Advertisement";
             return View();//navigated to AddNewAdvertisement view
         }
-
+        [Authorize]
         //a method only authorized users can have access to
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -95,6 +102,7 @@ namespace webStoreFinal.Controllers
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthAsync();
                 product.SellerId = userAuthenticated.Id;
+                product.ProductState = State.Available;
                 if (pictures.Length > 3)
                 {
                     ViewBag.PictureError = "please enter up to 3 pictures only";

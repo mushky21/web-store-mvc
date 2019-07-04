@@ -34,20 +34,20 @@
                         <td>
                             <a asp-action="ShowDetails" asp-controller="Home">@item.Title</a>
 
-                        </td>
-                        <td>
-                            @item.Price
-                        </td>
-                        <td>
-                            <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">Remove</a>
-                        </td>
-                    </tr>
-                }
-            </table>
-            <div class="cart-summary">
-                <div>
-                    total price for visitor:
-                    @TempData["visitorPrice"]
+                    </td>
+                    <td>
+                        @item.Price NIS
+                    </td>
+                    <td>
+                        <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">Remove</a>
+                    </td>
+                </tr>
+            }
+        </table>
+        <div class="cart-summary border border-primary float-right">
+            <div>
+                total price for visitor:
+                @TempData["visitorPrice"]
 
                 </div>
                 <div>

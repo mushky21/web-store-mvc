@@ -37,9 +37,10 @@
                 </div>
                 <div>
                     <label asp-for="BirthDate"></label>
-                    <input asp-for="BirthDate" />
-                    <span asp-validation-for="BirthDate"></span>
+                    <input type="text" disabled placeholder="@Model.BirthDate" />
+
                 </div>
+
                 <div>
                     <label asp-for="Email"></label>
                     <input asp-for="Email" />
@@ -53,6 +54,7 @@
                 <button class="btn btn-danger btn-sm">New password</button>
             </form>
         </div>
+
 </body>
 </html>
 \
