@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using webStoreFinal.Models;
 using webStoreFinal.Services;
+using webStoreFinal.ViewComponents;
 
 namespace webStoreFinal.Controllers
 {
@@ -74,7 +75,7 @@ namespace webStoreFinal.Controllers
             var product = _productRepository.FindProduct(id);
             if (product==null)
             {
-                return ViewComponent("ProductNotFound");
+                return ViewComponent(typeof(ErrorHandleViewComponent));
             }
             ViewBag.pageName = "More Details";
             return View("ShowDetails", product);

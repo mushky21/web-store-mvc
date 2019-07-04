@@ -37,7 +37,8 @@
                 </div>
                 <div>
                     <label asp-for="BirthDate"></label>
-                    <input type="text" disabled placeholder="@Model.BirthDate" />
+                    @*<input asp-for="BirthDate" />*@
+                    <div>@Model.BirthDate</div>
 
                 </div>
 
