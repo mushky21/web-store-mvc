@@ -75,7 +75,7 @@ namespace webStoreFinal.Controllers
             var product = _productRepository.FindProduct(id);
             if (product==null)
             {
-                return ViewComponent(typeof(ErrorHandleViewComponent));
+                return RedirectToAction("ShowError", "Error");
             }
             ViewBag.pageName = "More Details";
             return View("ShowDetails", product);
