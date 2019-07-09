@@ -7,7 +7,7 @@ using webStoreFinal.Validations;
 
 namespace webStoreFinal.Models
 {
-    public class Update:Register
+    public class ChangePassword
     {
         [Required]
         [IsCurrentPassword]
@@ -15,6 +15,10 @@ namespace webStoreFinal.Models
         public string CurrentPassword { get; set; }
         [Display(Name = "New password")]
         [DataType(DataType.Password)]
-        public override string Password { get; set; }
+        public string NewPassword { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Re-type Password")]
+        [Compare(nameof(NewPassword), ErrorMessage = "Please Type Again")]
+        public string PasswordConfirm { get; set; }
     }
 }

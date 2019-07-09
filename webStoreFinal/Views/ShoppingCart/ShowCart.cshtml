@@ -1,4 +1,4 @@
-﻿@model List<Product> 
+﻿
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>ShowCart</title>
@@ -13,32 +13,28 @@
             @await Html.PartialAsync("_LoginPartialView", new Login())
         }
     </div>
-    <div class="content">
-        <table>
-            <tr>
-                <th>item name</th>
-                <th>price</th>
-                <th>actions</th>
-            </tr>
-            @foreach (var item in Model)
-            {
+    @if (ViewBag.emptyMsg != null)
+    {
+        <div>
+            @ViewBag.emptyMsg
+        </div>
+    }
+    else
+    {
+        <div class="content">
+            <table>
                 <tr>
                     <td>
-                     <a asp-controller="home" asp-action="showDetails" asp-route-id="@item.ProductKey">   @item.Title</a>
+                        <a asp-action="ShowDetails" asp-controller="Home">@item.Title</a>
+
                     </td>
-                    
                     <td>
                         @item.Price NIS
-
                     </td>
-
                     <td>
-                        <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">
-                            remove from cart
-                        </a>
+                        <a asp-action="RemoveFromCart" asp-controller="ShoppingCart">Remove</a>
                     </td>
                 </tr>
-
             }
         </table>
         <div class="cart-summary border border-primary float-right">
@@ -46,16 +42,42 @@
                 total price for visitor:
                 @TempData["visitorPrice"]
 
+                        </td>
+                        <td>
+                            @item.Price NIS
+                        </td>
+                        <td>
+                            <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.ProductKey">Remove</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="cart-summary border border-primary float-right">
+                <div>
+                    total price for visitor:
+                    @TempData["visitorPrice"]
+
+                </div>
+                <div>
+                    total price for members:
+                    @TempData["memberPrice"]
+                    @*add member price*@
+                </div>
+                <form asp-controller="ShoppingCart" asp-action="CompletePurchase" method="post">
+                    <input type="submit" value="Purchase" />
+                </form>
+
             </div>
             <div>
                 total price for members:
                 @TempData["memberPrice"]
-
+                
             </div>
             <form asp-controller="ShoppingCart" asp-action="CompletePurchase" method="post">
                 <input type="submit" value="Purchase" />
             </form>
 
-        </div>
+    }
+
 </body>
 </html>

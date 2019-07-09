@@ -16,7 +16,7 @@ namespace webStoreFinal.Models
             {
                 greeting = "Good Morning";
             }
-            else if (hour > 12 && hour < 18)
+            else if (hour >= 12 && hour < 18)
             {
                 greeting = "good Afternoon";
             }

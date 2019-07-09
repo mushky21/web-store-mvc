@@ -9,10 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using webStoreFinal.Models;
 using webStoreFinal.Services;
+using webStoreFinal.ViewComponents;
 
 namespace webStoreFinal.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private IProductRepository _productRepository;
@@ -40,7 +40,6 @@ namespace webStoreFinal.Controllers
         //    return View(myProductsList);
         //}
 
-        [AllowAnonymous]
         public IActionResult AvailableItems()
         {
             ////try sign in user, if his username is exist in cookies
@@ -59,27 +58,24 @@ namespace webStoreFinal.Controllers
             return View("Index", _productRepository.AvailableItems());
         }
 
-        [AllowAnonymous]
         public IActionResult OrderByDate()
         {
             ViewBag.pageName = "HOME PAGE";
             return View("Index", _productRepository.OrderByDate());
         }
 
-        [AllowAnonymous]
         public IActionResult OrderByTitle()
         {
             ViewBag.pageName = "HOME PAGE";
             return View("Index", _productRepository.OrderByTitle());
         }
 
-        [AllowAnonymous]
         public IActionResult ShowDetails(int id)
         {
             var product = _productRepository.FindProduct(id);
             if (product==null)
             {
-                return ViewComponent("ProductNotFound");
+                return ViewComponent(typeof(ErrorHandleViewComponent));
             }
             ViewBag.pageName = "More Details";
             return View("ShowDetails", product);
@@ -99,7 +95,7 @@ namespace webStoreFinal.Controllers
         //a method only authorized users can have access to
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //    suggestion:    [Authorize(Roles ="SignedInUser")]
+        [Authorize]
         public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[] pictures)
         {
             ViewBag.pageName = "Add New Advertisement";

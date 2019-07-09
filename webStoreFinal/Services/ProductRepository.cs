@@ -21,7 +21,7 @@ namespace webStoreFinal.Services
 
         public Product FindProduct(int productId)
         {
-            var foundProduct = Products().Find((product) => product.ProductKey == productId);
+            var foundProduct = Products().FirstOrDefault((product) => product.ProductKey == productId);
             return foundProduct;
         }
 
@@ -122,8 +122,6 @@ namespace webStoreFinal.Services
             return orderByDate.ToList();
 
         }
-
-
 
         public List<Product> AvailableItems()
         {

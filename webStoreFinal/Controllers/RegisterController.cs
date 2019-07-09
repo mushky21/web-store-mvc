@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using webStoreFinal.Models;
@@ -26,7 +27,7 @@ namespace webStoreFinal.Controllers
             if (!User.Identity.IsAuthenticated) { return RedirectToAction("Register"); }
 
             MyUser userAuthenicated = await _userRepository.FindUserAuthAsync();
-            Update currentUserData = new Update
+            Register currentUserData = new Register
             {
                 BirthDate = userAuthenicated.BirthDate,
                 Email = userAuthenicated.Email,
@@ -46,7 +47,7 @@ namespace webStoreFinal.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Register(Register registerData)
-        {
+        {          
             if (ModelState.IsValid)
             {
                 var result = await _userRepository.AddUser(registerData);
@@ -65,8 +66,9 @@ namespace webStoreFinal.Controllers
             return View("Register");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdatingDetails(Update updateData)
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> UpdatingDetails(Register updateData)
         {
             if (ModelState.IsValid)
             {
@@ -76,7 +78,25 @@ namespace webStoreFinal.Controllers
                     return RedirectToAction("AvailableItems", "Home");
                 }
             }
-            return View("Update", updateData);
+            ViewBag.pageName = "Updating Page";
+            return View("Update", updateData);         
+        }
+
+        [Authorize]
+        public IActionResult UpdateNewPassword()
+        {
+            ViewBag.pageName = "Updating new password";
+            return View();
+        }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> UpdateNewPassword(ChangePassword changeData)
+        {
+            //update password
+            string newPass = changeData.NewPassword;
+            await _userRepository.UpdatePassword(newPass);
+            return RedirectToAction("AvailableItems", "Home");
         }
     }
 }

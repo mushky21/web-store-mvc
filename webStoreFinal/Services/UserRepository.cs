@@ -86,20 +86,21 @@ namespace webStoreFinal.Services
             return null;
         }
 
-        public async Task<IdentityResult> UpdateUser(Update updateData)
+        public async Task<IdentityResult> UpdatePassword(string password)
         {
-            //check if user changed his password
-            string password;
-            if (updateData.Password != null) password = updateData.Password;
-            else password = updateData.CurrentPassword;
+            MyUser userAuth = await FindUserAuthAsync();
+            string resetToken = await _userManager.GeneratePasswordResetTokenAsync(userAuth);
+            return await _userManager.ResetPasswordAsync(userAuth, resetToken, password);
+        }
 
+        public async Task<IdentityResult> UpdateUser(Register updateData)
+        {
             MyUser updatedUser = new MyUser
             {
                 FirstName = updateData.FirstName,
                 LastName = updateData.LastName,
                 BirthDate = updateData.BirthDate,
-                Email = updateData.Email,
-                PasswordHash = password
+                Email = updateData.Email
             };
             return await _userManager.UpdateAsync(updatedUser);
 

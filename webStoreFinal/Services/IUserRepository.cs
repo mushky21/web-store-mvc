@@ -14,7 +14,8 @@ namespace webStoreFinal.Services
         MyUser FindUserAuth();
         Task<MyUser> FindUserById(string userId);
         Task<IdentityResult> AddUser(Register registerData);
-        Task<IdentityResult> UpdateUser(Update updateData);
+        Task<IdentityResult> UpdateUser(Register updateData);
+        Task<IdentityResult> UpdatePassword(string password);
         Task<MyUser> FindUserByName(string username);
         Task<Login> RecognizeUser();
 
