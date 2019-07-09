@@ -10,7 +10,7 @@ namespace webStoreFinal.Controllers
     {
         public IActionResult ShowError()
         {
-            StatusCode(404);
+            
             return View();
         }
     }
