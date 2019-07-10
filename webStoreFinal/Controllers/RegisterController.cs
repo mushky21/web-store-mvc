@@ -35,13 +35,16 @@ namespace webStoreFinal.Controllers
                 LastName = userAuthenicated.LastName,
                 Username = userAuthenicated.UserName
             };
+
             ViewBag.pageName = "Updating Page";
+            ViewBag.activeRegister = true;
             return View("Update", currentUserData);
         }
 
         public IActionResult Register()
         {
             ViewBag.pageName = "Registration Page";
+            ViewBag.activeRegister = true;
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace webStoreFinal.Controllers
 
                 }
             }
+            ViewBag.activeRegister = true;
             ViewBag.pageName = "Registration Page";
             return View("Register");
         }

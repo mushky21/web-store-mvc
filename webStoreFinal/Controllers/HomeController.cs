@@ -54,6 +54,7 @@ namespace webStoreFinal.Controllers
             //}
 
             ViewBag.pageName = "HOME PAGE";
+            ViewBag.activeHome = true;
             if (TempData["LoginError"] != null) ViewBag.LoginError = TempData["LoginError"];
             return View("Index", _productRepository.AvailableItems());
         }
@@ -61,12 +62,14 @@ namespace webStoreFinal.Controllers
         public IActionResult OrderByDate()
         {
             ViewBag.pageName = "HOME PAGE";
+            ViewBag.activeHome = true;
             return View("Index", _productRepository.OrderByDate());
         }
 
         public IActionResult OrderByTitle()
         {
             ViewBag.pageName = "HOME PAGE";
+            ViewBag.activeHome = true;
             return View("Index", _productRepository.OrderByTitle());
         }
 
@@ -89,6 +92,7 @@ namespace webStoreFinal.Controllers
         public IActionResult AddNewAdvertisement()
         {
             ViewBag.pageName = "Add New Advertisement";
+            ViewBag.activeAdd = true;
             return View();//navigated to AddNewAdvertisement view
         }
         [Authorize]
@@ -116,6 +120,7 @@ namespace webStoreFinal.Controllers
 
 
             }
+            ViewBag.activeAdd = true;
             return View();
 
         }

@@ -23,6 +23,7 @@ namespace webStoreFinal.Controllers
         public IActionResult ShowCart()
         {
             ViewBag.pageName = "Current Cart Content";
+            ViewBag.activeCart = true;
             List<Product> currentCart = _cartService.ShowCart();
 
             if(currentCart.Count==0)
