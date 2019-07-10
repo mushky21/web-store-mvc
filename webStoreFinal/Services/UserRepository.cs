@@ -45,15 +45,6 @@ namespace webStoreFinal.Services
 
         public async Task<MyUser> FindUserAuthAsync()
         {
-            //var userId = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
-            //if (userId != null)//more safe
-            //{
-            //    return await _userManager.FindByIdAsync(userId);
-
-            //}
-            //var user = _userManager.GetUserId(_httpContextAccessor.HttpContext.User);
-            ////var user= await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            //var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             var user = await _userManager.FindByNameAsync(_httpContextAccessor.HttpContext.User.Identity.Name);
             return user;
         }

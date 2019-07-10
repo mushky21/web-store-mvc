@@ -98,24 +98,31 @@ namespace webStoreFinal.Controllers
         [Authorize]
         public async Task<IActionResult> AddNewAdvertisement(Product product, IFormFile[] pictures)
         {
+            bool isAdded = default(bool) ;
             ViewBag.pageName = "Add New Advertisement";
             if (ModelState.IsValid)
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthAsync();
                 product.SellerId = userAuthenticated.Id;
-                product.ProductState = State.Available;
+               
                 if (pictures.Length > 3)
                 {
                     ViewBag.PictureError = "please enter up to 3 pictures only";
                 }
                 else if (pictures.Length < 3)
                 {
-                    await _productRepository.AddProduct(product, pictures);
-                    ViewBag.ItemAdded = "the item was published successfully";
+                    isAdded = await _productRepository.AddProduct(product, pictures);
+                    if (isAdded)
+                    {
+                        ViewBag.isAdded = isAdded;
+                        ViewBag.ItemAdded = "the item was published successfully";
+                    }
+                 
                 }
 
 
             }
+            ;
             return View();
 
         }
