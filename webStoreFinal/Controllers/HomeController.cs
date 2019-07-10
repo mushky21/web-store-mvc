@@ -104,6 +104,7 @@ namespace webStoreFinal.Controllers
             {
                 MyUser userAuthenticated = await _userRepository.FindUserAuthAsync();
                 product.SellerId = userAuthenticated.Id;
+                product.PublishedDate = DateTime.Now;
                
                 if (pictures.Length > 3)
                 {
@@ -119,10 +120,8 @@ namespace webStoreFinal.Controllers
                     }
                  
                 }
-
-
             }
-            ;
+
             return View();
 
         }

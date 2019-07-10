@@ -10,8 +10,8 @@ using webStoreFinal.Data;
 namespace webStoreFinal.Migrations
 {
     [DbContext(typeof(myStoreDbContext))]
-    [Migration("20190710143136_MyMigration")]
-    partial class MyMigration
+    [Migration("20190710165052_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,6 +209,8 @@ namespace webStoreFinal.Migrations
                     b.Property<double>("Price");
 
                     b.Property<int>("ProductState");
+
+                    b.Property<DateTime>("PublishedDate");
 
                     b.Property<string>("SellerId");
 

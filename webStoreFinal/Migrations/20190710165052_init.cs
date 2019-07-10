@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace webStoreFinal.Migrations
 {
-    public partial class MyMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -162,6 +162,7 @@ namespace webStoreFinal.Migrations
                 {
                     ProductKey = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PublishedDate = table.Column<DateTime>(nullable: false),
                     SellerId = table.Column<string>(nullable: true),
                     BuyerId = table.Column<string>(nullable: true),
                     Title = table.Column<string>(maxLength: 10, nullable: false),

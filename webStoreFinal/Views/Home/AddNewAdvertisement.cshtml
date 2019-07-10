@@ -13,58 +13,61 @@
     @section Title{
         @await Html.PartialAsync("_TitlePartialView")
     }
+    <div>
 
-
+        @section Login{
+            @await Html.PartialAsync("_LoginPartialView", new Login())
+        }
+    </div>
 
     <div>
         @if (ViewBag.ItemAdded != null)
         {
-            <div>@ViewBag.ItemAdded</div>
+            <div class="alert-heading">@ViewBag.ItemAdded</div>
             <a asp-action="AvailableItems" asp-controller="Home">Return to HomePage</a>
         }
+        else
+        { <div class="content">
+                <form asp-action="AddNewAdvertisement" method="post" enctype="multipart/form-data">
+
+                    <div>
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" />
+                        <span asp-validation-for="Title"></span>
+                    </div>
+                    <div>
+                        <label asp-for="ShortDescription"></label>
+                        <input asp-for="ShortDescription" />
+                        <span asp-validation-for="ShortDescription"></span>
+                    </div>
+                    <div>
+                        <label asp-for="LongDescription"></label>
+                        <input asp-for="LongDescription" />
+                        <span asp-validation-for="LongDescription"></span>
+                    </div>
+                    <div>
+                        <label asp-for="Price"></label>
+                        <input asp-for="Price" />
+                        <span asp-validation-for="Price"></span>
+                    </div>
+                    <div>
+                        <input type="file" name="pictures" multiple>
+                    </div>
+                    <div>
+                        @ViewBag.PictureError
+                    </div>
+
+                    <input type="submit" value="Save " />
+                    <div asp-validation-summary="All">
+
+
+                    </div>
+
+                </form>
+            </div>
+
+        }
     </div>
-    <div>
 
 
-    </div>
-
-
-    <div class="content">
-        <form asp-action="AddNewAdvertisement" method="post" enctype="multipart/form-data">
-
-            <div>
-                <label asp-for="Title"></label>
-                <input asp-for="Title" />
-                <span asp-validation-for="Title"></span>
-            </div>
-            <div>
-                <label asp-for="ShortDescription"></label>
-                <input asp-for="ShortDescription" />
-                <span asp-validation-for="ShortDescription"></span>
-            </div>
-            <div>
-                <label asp-for="LongDescription"></label>
-                <input asp-for="LongDescription" />
-                <span asp-validation-for="LongDescription"></span>
-            </div>
-            <div>
-                <label asp-for="Price"></label>
-                <input asp-for="Price" />
-                <span asp-validation-for="Price"></span>
-            </div>
-            <div>
-                <input type="file" name="pictures" multiple>
-            </div>
-            <div>
-                @ViewBag.PictureError
-            </div>
-
-            <input type="submit" value="Save " />
-            <div asp-validation-summary="All">
-
-
-            </div>
-
-        </form>
-    </div>
 </body>

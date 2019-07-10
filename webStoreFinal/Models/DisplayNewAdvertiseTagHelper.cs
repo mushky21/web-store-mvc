@@ -10,9 +10,9 @@ namespace webStoreFinal.Models
 {
     public static class DisplayNewAdvertiseTagHelper
     {
-        public static IHtmlContent DisabledIf(this IHtmlHelper htmlHelper,
-                                              bool condition)
-        => new HtmlString(condition ? "disabled=\"disabled\"" : "");
+        //public static IHtmlContent DisabledIf(this IHtmlHelper htmlHelper,
+        //                                      bool condition)
+        //=> new HtmlString(condition ? "disabled=\"disabled\"" : "");
 
     }
 }

@@ -208,6 +208,8 @@ namespace webStoreFinal.Migrations
 
                     b.Property<int>("ProductState");
 
+                    b.Property<DateTime>("PublishedDate");
+
                     b.Property<string>("SellerId");
 
                     b.Property<string>("ShortDescription")
