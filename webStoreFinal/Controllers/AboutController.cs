@@ -11,6 +11,7 @@ namespace webStoreFinal.Controllers
         public IActionResult Index()
         {
             ViewBag.pageName = "About Us";
+            ViewBag.activeAbout = true;
             return View();
         }
     }

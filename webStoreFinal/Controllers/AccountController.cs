@@ -37,6 +37,7 @@ namespace webStoreFinal.Controllers
                 //need to show error message of "the user name or password are incorrect"
             }
         }
+
         [Authorize]
         public async Task<IActionResult> LogOut()
         {

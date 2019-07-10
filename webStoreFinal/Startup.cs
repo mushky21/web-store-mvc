@@ -31,6 +31,7 @@ namespace webStoreFinal
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IReadImage, ReadImage>();
+            services.AddTransient<IHighlightActive, HighlightActive>();
 
             services.AddDbContext<myStoreDbContext>(options => 
                 options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
