@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using webStoreFinal.Models;
 using webStoreFinal.Services;
-using webStoreFinal.ViewComponents;
+
 
 namespace webStoreFinal.Controllers
 {

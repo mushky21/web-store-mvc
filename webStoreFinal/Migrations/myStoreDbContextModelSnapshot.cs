@@ -15,7 +15,7 @@ namespace webStoreFinal.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -275,11 +275,11 @@ namespace webStoreFinal.Migrations
             modelBuilder.Entity("webStoreFinal.Models.Product", b =>
                 {
                     b.HasOne("webStoreFinal.Models.MyUser", "Buyer")
-                        .WithMany()
+                        .WithMany("Purchases")
                         .HasForeignKey("BuyerId");
 
                     b.HasOne("webStoreFinal.Models.MyUser", "Seller")
-                        .WithMany()
+                        .WithMany("Sells")
                         .HasForeignKey("SellerId");
                 });
 #pragma warning restore 612, 618

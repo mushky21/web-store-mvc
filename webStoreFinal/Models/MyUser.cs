@@ -11,6 +11,10 @@ namespace webStoreFinal.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
+
+        public virtual ICollection<Product> Sells { get; set; }
+        public virtual ICollection<Product> Purchases { get; set; }
+
     }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using webStoreFinal.Validations;
@@ -21,11 +22,16 @@ namespace webStoreFinal.Models
             
         }
         public DateTime PublishedDate { get { return _publishedDate; } }
+
+        [ForeignKey("SellerId")]
+        [InverseProperty("Sells")]
         public virtual MyUser Seller { get; set; }
         public string SellerId { get; set; }
 
+        [ForeignKey("BuyerId")]
+        [InverseProperty("Purchases")]
         public virtual MyUser Buyer { get; set; }
-        public string BuyerId { get; set; } //{ get { return Buyer.UserId; } }
+        public string BuyerId { get; set; }
 
         [Required]
         [StringLength(10)]
