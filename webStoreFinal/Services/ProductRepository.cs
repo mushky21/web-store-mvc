@@ -94,7 +94,7 @@ namespace webStoreFinal.Services
             var foundProduct = FindProduct(id);
             if (foundProduct!=null)
             {
-                foundProduct.ProductState = State.Available;
+                foundProduct.ProductState =state;
                 updated = _storeDbContext.SaveChanges();
             }
             return updated > 0;
