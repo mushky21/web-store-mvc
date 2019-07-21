@@ -42,7 +42,7 @@ namespace webStoreFinal.Services
                         {
                             newProduct.Photo2 = msStream.ToArray();
                         }
-                        if (i == 2)
+                       else if (i == 2)
                         {
                             newProduct.Photo3 = msStream.ToArray();
                         }

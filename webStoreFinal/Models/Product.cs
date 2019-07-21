@@ -12,16 +12,8 @@ namespace webStoreFinal.Models
     {
         [Key]
         public int ProductKey { get; set; }
-        private DateTime _publishedDate;
-        public Product()
-        {
-            if (_publishedDate == null)
-            {
-                _publishedDate = DateTime.Now;
-            }
-            
-        }
-        public DateTime PublishedDate { get { return _publishedDate; } }
+
+        public DateTime PublishedDate { get; set; }
 
         [ForeignKey("SellerId")]
         [InverseProperty("Sells")]
